@@ -1,8 +1,8 @@
 import { useState } from "react";
 
-interface Value {
-    value: Number
-}
+// interface Value {
+//     value: Number
+// }
 
 const Counter = () => {
     const [state, setState] = useState(0);
