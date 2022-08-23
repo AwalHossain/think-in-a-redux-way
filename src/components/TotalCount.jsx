@@ -1,5 +1,5 @@
 
-const TotalCount = ({state}: any) => {
+const TotalCount = ({state}) => {
   console.log(state.state);
   
   return (

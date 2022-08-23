@@ -16,38 +16,42 @@ const initialState = [
 
 function App() {
 
-  const [state, setState] = useState<any>(initialState)
+  const [state, setState] = useState(initialState)
   console.log(state, "oo");
 
 
   const totalNum = () => {
 
-    return state.reduce((total: any, curr: any) => total + curr.count, 0)
+    return state.reduce((total, counter) => total + counter.count, 0)
   }
 
   console.log(totalNum());
 
-  const increment = (id: any) => {
-    let updateCounter = state.map((c: any) => {
+  const increment = (id) => {
+    let updateCounter = state.map((c) => {
       if (c.id == id) {
         return {
           ...c,
           count: c.count + 1
         }
       }
+
+      return {...c};
     })
 
     setState(updateCounter);
   }
 
-  const deccrement = (id: any) => {
-    const updateCounter = state.map((c: any) => {
+  const decrement = (id) => {
+    const updateCounter = state.map((c) => {
       if (c.id == id) {
         return {
           ...c,
           count: c.count - 1
         }
       }
+
+      return {...c};
     })
 
     setState(updateCounter)
@@ -58,14 +62,23 @@ function App() {
 
   return (
     <div className="w-screen h-screen p-10 bg-gray-100 text-slate-700">
-      {/* <!-- header --> */}
+     
       <h1 className="max-w-md mx-auto text-center text-2xl font-bold">
         Simple Counter Application
       </h1>
 
       <div>
-        <Counter />
-        <Counter />
+        {
+          state.map((c) => (
+            <Counter
+              key={c.id}
+              increment={increment}
+              decrement={decrement}
+              count={c.count}
+              id={c.id}
+            />
+          ))
+        }
       </div>
       <div>
         <TotalCount state={totalNum()} />
