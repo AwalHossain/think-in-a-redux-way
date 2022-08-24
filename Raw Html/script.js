@@ -19,7 +19,19 @@ const DECREMENT = "decrement";
 
 /** Action Creators */
 
+const increment = (value)=>{
+return {
+    type: INCREMENT,
+    payload: value,
+}
+}
 
+const decrement =(value)=>{
+   return{
+    type :DECREMENT,
+    payload: value,
+   }
+}
 
 //Create reducer function
 
@@ -58,15 +70,9 @@ store.subscribe(render)
 
 //button click listeners
 incrementEl.addEventListener('click', ()=>{
-    store.dispatch({
-        type: INCREMENT,
-        payload: 5,
-    })
+    store.dispatch(increment(5))
 })
 
 decrementtEl.addEventListener("click", ()=>{
-    store.dispatch({
-        type :DECREMENT,
-        payload: 2,
-    })
+    store.dispatch(decrement(2))
 })
