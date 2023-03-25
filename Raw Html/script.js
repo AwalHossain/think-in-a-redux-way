@@ -2,7 +2,7 @@
 
 const counterEl = document.getElementById('counter');
 const incrementEl = document.getElementById('increment')
-const decrementtEl = document.getElementById('decrement')
+const decrementEl = document.getElementById('decrement')
 
 
 
@@ -20,59 +20,58 @@ const DECREMENT = "decrement";
 /** Action Creators */
 
 const increment = (value)=>{
-return {
-    type: INCREMENT,
-    payload: value,
+    return {
+        type: INCREMENT,
+        payload: value
+    }
 }
+const decrement = (value)=>{
+    return {
+       type: DECREMENT,
+        payload: value
+    }
 }
 
-const decrement =(value)=>{
-   return{
-    type :DECREMENT,
-    payload: value,
-   }
-}
 
-//Create reducer function
-
-function countReducer( state = initialState, action){
-
-    if(action.type == INCREMENT){
+// create reducer function
+function counterReducer(state = initialState, action) {
+    if (action.type === INCREMENT) {
+        console.log(action);
         return {
             ...state,
             value: state.value + action.payload,
-        }
-    }else if (action.type == DECREMENT){
+        };
+    } else if (action.type === DECREMENT) {
         return {
             ...state,
             value: state.value - action.payload,
-        }
-    }else{
+        };
+    } else {
         return state;
     }
 }
 
 
-//create a store 
-const store = Redux.createStore(countReducer);
 
 
-const render = ()=>{
+// create store
+const store = Redux.createStore(counterReducer);
+
+const render = () => {
     const state = store.getState();
-    counterEl.innerText =  state.value.toString();
+    counterEl.innerText = state.value.toString();
+};
 
-}
-
+// update UI initially
 render();
 
-store.subscribe(render)
+store.subscribe(render);
 
+// button click listeners
+incrementEl.addEventListener("click", () => {
+    store.dispatch(increment(3));
+});
 
-//button click listeners
-incrementEl.addEventListener('click', ()=>{
-    store.dispatch(increment(5))
-})
-
-decrementtEl.addEventListener("click", ()=>{
-    store.dispatch(decrement(2))
-})
+decrementEl.addEventListener("click", () => {
+    store.dispatch(decrement(2));
+});
