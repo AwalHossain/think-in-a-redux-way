@@ -1,7 +1,9 @@
 import { useState } from 'react';
+import { Provider } from 'react-redux';
 import './App.css';
 import Counter from './components/Counter';
 import TotalCount from './components/TotalCount';
+import { store } from './Redux/store';
 
 const initialState = [
   {
@@ -29,7 +31,7 @@ function App() {
 
   const increment = (id) => {
     let updateCounter = state.map((c) => {
-      if (c.id == id) {
+      if (c.id === id) {
         return {
           ...c,
           count: c.count + 1
@@ -44,7 +46,7 @@ function App() {
 
   const decrement = (id) => {
     const updateCounter = state.map((c) => {
-      if (c.id == id) {
+      if (c.id === id) {
         return {
           ...c,
           count: c.count - 1
@@ -61,6 +63,8 @@ function App() {
 
 
   return (
+    <Provider store={store}>
+
     <div className="w-screen h-screen p-10 bg-gray-100 text-slate-700">
      
       <h1 className="max-w-md mx-auto text-center text-2xl font-bold">
@@ -84,7 +88,13 @@ function App() {
         <TotalCount state={totalNum()} />
       </div>
     </div>
+    </Provider>
   );
 }
+
+
+
+// export default connect 
+
 
 export default App;
