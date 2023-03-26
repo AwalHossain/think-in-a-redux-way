@@ -3,34 +3,44 @@
 //     value: Number
 // }
 
-import Button from "./Button"
+import { connect } from "react-redux";
+import { decrement, increment } from "../Redux/counter/actions";
 
-const Counter = ({ increment, decrement, id, count }) => {
-    // const [state, setState] = useState(0);
-
-    // const increment = ()=> {
-    //     setState(prevCount => prevCount +1)
-    // };
-    // const decrement = () =>{
-
-    //     setState(prevCount => prevCount -1);
-    // }
-
+const Counter = ({ increment, decrement, count }) => {
+    console.log(increment,"incre");
     return (
-        <div>
-            <div className="max-w-md mx-auto mt-10 space-y-5">
-                <div
-                    className="p-4 h-auto flex flex-col items-center justify-center space-y-5 bg-white rounded shadow"
-                >
-                    <div className="text-2xl font-semibold" id="counter">{count}</div>
-                    <div className="flex space-x-3">
-                        <Button handler={()=> increment(id)} >Increment</Button>
-                        <Button handler={()=> decrement(id)} >Decrement</Button>
-                    </div>
-                </div>
-            </div>
+      <div className="p-4 h-auto flex flex-col items-center justify-center space-y-5 bg-white rounded shadow">
+        <div className="text-2xl font-semibold">{count}</div>
+        <div className="flex space-x-3">
+          <button
+            className="bg-indigo-400 text-white px-3 py-2 rounded shadow"
+            onClick={increment}
+          >
+            Increment
+          </button>
+          <button
+            className="bg-red-400 text-white px-3 py-2 rounded shadow"
+            onClick={decrement}
+          >
+            Decrement
+          </button>
         </div>
-    )
+      </div>
+    );
 }
 
-export default Counter
+
+const mapStateProps=(state)=>{
+    return{
+        count: state.value
+    }
+}
+
+const mapDispatchToProps = (dispatch)=>{
+    return {
+        increment: (value)=> dispatch(increment(value)),
+        decrement: (value)=> dispatch(decrement(value))
+    }
+}
+
+export default connect(mapStateProps, mapDispatchToProps)(Counter)
