@@ -6,7 +6,7 @@ import { todosReducer } from './todos/reducer';
 
 const rootReducer = combineReducers({
     todos: todosReducer,
-        filter: filterReducer,
+        filters: filterReducer,
 });
 
 
