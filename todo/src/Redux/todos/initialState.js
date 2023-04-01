@@ -12,7 +12,7 @@
             {
                 id: 2,
                 task: 'Learn Redux',
-                completed: false,
+                completed: true,
                 color: 'red',
             },
 
