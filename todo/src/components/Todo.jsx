@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import cancel from "../images/cancel.png";
-import { colorSelectTodo, toggleTodo } from "../Redux/todos/action";
+import { colorSelectTodo, deleteTodo, toggleTodo } from "../Redux/todos/action";
 export default function Todo({todo}) {
   console.log(todo.completed,"todo.completed");
   const dispatch = useDispatch();
@@ -67,6 +67,7 @@ export default function Todo({todo}) {
         ></div>
 
         <img
+        onClick={() => dispatch(deleteTodo(todo.id))}
           src={cancel}
           class="flex-shrink-0 w-4 h-4 ml-2 cursor-pointer"
           alt="Cancel"
