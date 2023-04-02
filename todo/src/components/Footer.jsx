@@ -65,7 +65,7 @@ export default function Footer() {
         <li></li>
         <li
           onClick={() => handleColorChange("green")}
-          class={`h-3 w-3 border-2 border-green-500 md:hover:bg-green-500 rounded-full cursor-pointer ${
+          class={`h-3 w-3 border-2 border-green-500  rounded-full cursor-pointer ${
             colors.includes("green") && "bg-green-500"
           } `}
         ></li>
@@ -73,13 +73,13 @@ export default function Footer() {
           onClick={() => handleColorChange("red")}
           class={`h-3 w-3 border-2 border-red-500 ${
             colors.includes("red") && "bg-red-500"
-          }  md:hover:bg-red-500 rounded-full cursor-pointer`}
+          }   rounded-full cursor-pointer`}
         ></li>
         <li
           onClick={() => handleColorChange("yellow")}
           class={`h-3 w-3 border-2 border-yellow-500 ${
             colors.includes("yellow") && "bg-yellow-500"
-          } md:hover:bg-yellow-500 rounded-full cursor-pointer`}
+          }  rounded-full cursor-pointer`}
         ></li>
       </ul>
     </div>
