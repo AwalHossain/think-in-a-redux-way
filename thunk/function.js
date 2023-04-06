@@ -1,18 +1,20 @@
+const fetch = require("node-fetch");
 
+const fetchTodos = async (dispatch, getState) => {
+    const response = await fetch(
+        "https://jsonplaceholder.typicode.com/todos?_limit=5"
+    );
 
-const fetchTodos = () => {
-    const todos = await fetch('https://jsonplaceholder.typicode.com/todos/');
-    const todosJson = await todos.json();
+    const todos = await response.json();
 
     dispatch({
-        type: 'LOAD_TODOS',
-        payload: todosJson
-    })
+        type: "todos/todoLoaded",
+        payload: todos,
+    });
 
-    console.log(`Number of the updated todos`);
-
-}
+    console.log(`Number of updated todos: ${getState().todos.length}`);
+};
 
 module.exports = {
-    fetchTodos
-}
+    fetchTodos,
+};

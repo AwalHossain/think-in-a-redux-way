@@ -1,60 +1,55 @@
-const {applyMiddleware, createStore} = require('redux')
-const {delayActionMiddleware} = require('./middleware')
-const { fetchTodos } = require('./function')
+const { createStore, applyMiddleware } = require("redux");
+const {
+    delayActionMiddleware,
+    fetchAsyncMiddleware,
+} = require("./middleware");
+const { fetchTodos } = require("./function");
 
-
+// initial state
 const initialState = {
-    todos: []
-}
+    todos: [],
+};
 
-
-
-
-
+// reducer
 const todoReducer = (state = initialState, action) => {
-    switch(action.type) {
-        case 'ADD_TODO':
-            return{
-                ...state,
-                todos:[...state.todos,
-                
-                    {
-                        title: action.payload,
-                    }
-                ]
-            }
-
-
-        case 'LOAD_TODOS':
+    switch (action.type) {
+        case "todos/todoAdded":
             return {
                 ...state,
-                todos:[...state.todos, ...action.payload]
+                todos: [
+                    ...state.todos,
+                    {
+                        title: action.payload,
+                    },
+                ],
+            };
 
-            }
+        case "todos/todoLoaded":
+            return {
+                ...state,
+                todos: [...state.todos, ...action.payload],
+            };
 
         default:
-            return state
+            break;
     }
-}
+};
 
+// store
+const store = createStore(
+    todoReducer,
+    applyMiddleware(delayActionMiddleware, fetchAsyncMiddleware)
+);
 
+// subscribe to state changes
+store.subscribe(() => {
+    console.log(store.getState());
+});
 
-// create store
-const store =createStore(todoReducer,applyMiddleware(delayActionMiddleware))
-
-
-// subscribe to store
-
-store.subscribe(()=>{
-    console.log(store.getState())
-})
-
-
-
+// disptach actions
 // store.dispatch({
-//     type: 'ADD_TODO',
-//     payload: 'Learn Redux'
-// })
-
+//     type: "todos/todoAdded",
+//     payload: "Learn Redux from LWS",
+// });
 
 store.dispatch(fetchTodos);
