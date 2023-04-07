@@ -1,12 +1,31 @@
+import { useEffect } from 'react';
 import { Provider } from 'react-redux';
 import './App.css';
+import store from './Redux/store';
 import Footer from './components/Footer';
 import Header from './components/Header';
 import Navbar from './components/Navbar';
 import TodoList from './components/TodoList';
-import store from './Redux/store';
 
 function App() {
+  console.log("json")
+  useEffect(() => {
+    async function fetchData() {
+      
+      
+      try{
+        console.log("json", "useEffect" );
+        const response = await fetch("http://localhost:5000/todos");
+        const json = await response.json();
+        console.log(json);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchData();
+    
+
+  }, []);
   return (
     <Provider store={store}>
     <div className="">

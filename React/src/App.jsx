@@ -1,9 +1,9 @@
 import { Provider } from 'react-redux';
 import './App.css';
+import { store } from './Redux/store';
 import DyHooksCounter from './components/DynamicCounter';
 import HooksCounter from './components/HooksCounter';
 import VariableCounter from "./components/VariableCounter";
-import { store } from './Redux/store';
 
 
 
