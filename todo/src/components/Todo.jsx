@@ -1,17 +1,15 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import cancel from "../images/cancel.png";
 import { colorSelectTodo, deleteTodo, toggleTodo } from "../Redux/todos/action";
+import cancel from "../images/cancel.png";
 export default function Todo({todo}) {
-  console.log(todo.completed,"todo.completed");
   const dispatch = useDispatch();
+
   const handleChecked = (id) => {
-    console.log("checked");
     dispatch(toggleTodo(id))
   };
 
   const handleColor = (id, color) => {
-    console.log("color");
     dispatch(colorSelectTodo(id, color));
   };
 
@@ -42,7 +40,7 @@ export default function Todo({todo}) {
         </div>
 
         <div class={`select-none flex-1 ${todo.completed && "line-through"}`}>
-          {todo.task}
+          {todo.text}
         </div>
 
         <div

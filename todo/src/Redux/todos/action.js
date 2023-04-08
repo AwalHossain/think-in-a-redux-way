@@ -1,13 +1,19 @@
 
 // write action creators for the todos
 
-import { ADD_TODO, ALLCOMPLETE_TODO, CLEARCOMPLETE_TODO, COLORSELECT_TODO, DELETE_TODO, TOGGLE_TODO } from "./actionTypes";
+import { ADD_TODO, ALLCOMPLETE_TODO, CLEARCOMPLETE_TODO, COLORSELECT_TODO, DELETE_TODO, LOAD_TODOS, TOGGLE_TODO } from "./actionTypes";
 
 
 
 export const addTodo = (todo) => {
     return {
         type: ADD_TODO,
+        payload: todo,
+    };
+    }
+export const loadTodos = (todo) => {
+    return {
+        type: LOAD_TODOS,
         payload: todo,
     };
     }

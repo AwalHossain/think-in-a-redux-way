@@ -1,6 +1,6 @@
 // write down action reducers for the todos
 
-import { ADD_TODO, ALLCOMPLETE_TODO, CLEARCOMPLETE_TODO, COLORSELECT_TODO, DELETE_TODO, TOGGLE_TODO } from './actionTypes';
+import { ADD_TODO, ALLCOMPLETE_TODO, CLEARCOMPLETE_TODO, COLORSELECT_TODO, DELETE_TODO, LOAD_TODOS, TOGGLE_TODO } from './actionTypes';
 import initialState from './initialState';
 
 const nextTodoId = (todos)=>{
@@ -22,6 +22,9 @@ export const todosReducer = (state = initialState, action) => {
                         completed: false
                     }
                 ]
+            case LOAD_TODOS:
+                return action.payload;
+                
             case TOGGLE_TODO:
                 return state.map((todo)=>{
                     if(todo.id !== action.payload){
