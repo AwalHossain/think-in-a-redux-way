@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import addTodoThunk from '../Redux/thunk/addTodo';
+import { allCompleteTodo, clearCompleteTodo } from '../Redux/todos/action';
 import dobleTick from '../images/double-tick.png';
 import notes from '../images/notes.png';
-import { addTodo, allCompleteTodo, clearCompleteTodo } from '../Redux/todos/action';
 export default function Header() {
   const [input, setInput] = useState();
   const dispatch = useDispatch();
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    dispatch(addTodo(input))
+    dispatch(addTodoThunk(input))
 
   };
   const handleAllTask = () => {

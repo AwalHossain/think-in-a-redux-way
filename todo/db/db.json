@@ -49,6 +49,16 @@
       "text": "hdjhdjhdjsdh",
       "completed": false,
       "id": 9
+    },
+    {
+      "text": "make it big",
+      "completed": false,
+      "id": 10
+    },
+    {
+      "text": "make it short",
+      "completed": false,
+      "id": 11
     }
   ]
 }

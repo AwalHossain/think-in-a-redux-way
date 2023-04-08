@@ -9,7 +9,6 @@ const fetchTodos = () => {
         
         dispatch(loadTodos(todos));
     }
-    console.log("todos", 'todos');
 }
 
 export default fetchTodos;

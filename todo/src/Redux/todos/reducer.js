@@ -16,11 +16,7 @@ export const todosReducer = (state = initialState, action) => {
             case ADD_TODO:
                 return[
                     ...state,
-                    {
-                        id: nextTodoId(state),
-                        task: action.payload,
-                        completed: false
-                    }
+                    action.payload
                 ]
             case LOAD_TODOS:
                 return action.payload;
