@@ -4,13 +4,13 @@
       "id": 1,
       "text": "Learn Vanilla JavaScript",
       "completed": true,
-      "color": "yellow"
+      "color": "green"
     },
     {
       "id": 2,
       "text": "Learn Modern ES6+ JavaScript",
       "completed": false,
-      "color": "red"
+      "color": "green"
     },
     {
       "id": 3,
@@ -48,7 +48,8 @@
     {
       "text": "hdjhdjhdjsdh",
       "completed": false,
-      "id": 9
+      "id": 9,
+      "color": "red"
     },
     {
       "text": "make it big",

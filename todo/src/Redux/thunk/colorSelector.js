@@ -17,7 +17,7 @@ const colorSelectorThunk = (id, color) => {
 
         const data = await res.json();
 
-        dispatch(colorSelectTodo(data.id));
+        dispatch(colorSelectTodo(data.id, data.color));
 
     }
 }
