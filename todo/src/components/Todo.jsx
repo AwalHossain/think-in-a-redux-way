@@ -1,16 +1,18 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { colorSelectTodo, deleteTodo, toggleTodo } from "../Redux/todos/action";
+import colorSelectorThunk from "../Redux/thunk/colorSelector";
+import toggleTodoThunk from "../Redux/thunk/toggleTodo";
+import { deleteTodo } from "../Redux/todos/action";
 import cancel from "../images/cancel.png";
 export default function Todo({todo}) {
   const dispatch = useDispatch();
 
   const handleChecked = (id) => {
-    dispatch(toggleTodo(id))
+    dispatch(toggleTodoThunk(id, todo?.completed))
   };
 
   const handleColor = (id, color) => {
-    dispatch(colorSelectTodo(id, color));
+    dispatch(colorSelectorThunk(id, color));
   };
 
   return (

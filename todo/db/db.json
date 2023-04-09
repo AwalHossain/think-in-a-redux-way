@@ -9,7 +9,7 @@
     {
       "id": 2,
       "text": "Learn Modern ES6+ JavaScript",
-      "completed": true,
+      "completed": false,
       "color": "red"
     },
     {
