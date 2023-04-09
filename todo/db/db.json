@@ -19,47 +19,19 @@
       "color": "yellow"
     },
     {
-      "text": "Learn Redux Basics",
-      "completed": true,
-      "id": 4,
-      "color": "red"
+      "text": "new one",
+      "completed": false,
+      "id": 4
     },
     {
-      "text": "Learn Redux fundamentals",
-      "completed": true,
-      "id": 5,
-      "color": "red"
+      "text": "venture",
+      "completed": false,
+      "id": 5
     },
     {
-      "text": "learn Redux",
+      "text": "venture capitalist",
       "completed": false,
       "id": 6
-    },
-    {
-      "text": "Learn Redux Toolkit",
-      "completed": false,
-      "id": 7
-    },
-    {
-      "text": "Test",
-      "completed": false,
-      "id": 8
-    },
-    {
-      "text": "hdjhdjhdjsdh",
-      "completed": false,
-      "id": 9,
-      "color": "red"
-    },
-    {
-      "text": "make it big",
-      "completed": false,
-      "id": 10
-    },
-    {
-      "text": "make it short",
-      "completed": false,
-      "id": 11
     }
   ]
 }

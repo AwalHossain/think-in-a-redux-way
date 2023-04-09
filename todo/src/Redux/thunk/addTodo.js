@@ -2,7 +2,6 @@ import { addTodo } from '../todos/action';
 
 
 const addTodoThunk = (input) => {
-    console.log(input, 'input');
     return async (dispatch) => {
         const res = await fetch('http://localhost:3001/todos',{
             method: 'POST',
@@ -17,6 +16,7 @@ const addTodoThunk = (input) => {
 
         });
         const todo = await res.json();
+        console.log(todo, 'input');
 
         dispatch(addTodo(todo));
     }

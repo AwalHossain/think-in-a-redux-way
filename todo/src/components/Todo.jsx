@@ -1,8 +1,8 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import colorSelectorThunk from "../Redux/thunk/colorSelector";
+import deleteTodoThunk from "../Redux/thunk/deleteTodo";
 import toggleTodoThunk from "../Redux/thunk/toggleTodo";
-import { deleteTodo } from "../Redux/todos/action";
 import cancel from "../images/cancel.png";
 export default function Todo({todo}) {
   const dispatch = useDispatch();
@@ -67,7 +67,7 @@ export default function Todo({todo}) {
         ></div>
 
         <img
-        onClick={() => dispatch(deleteTodo(todo.id))}
+        onClick={() => dispatch(deleteTodoThunk(todo.id))}
           src={cancel}
           class="flex-shrink-0 w-4 h-4 ml-2 cursor-pointer"
           alt="Cancel"
