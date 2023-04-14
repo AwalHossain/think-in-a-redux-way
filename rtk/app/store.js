@@ -8,3 +8,7 @@ const store = configureStore({
         dynamicCounter:  dynamicCounterSlice
     }
 })
+
+
+
+module.exports = store
