@@ -11,7 +11,7 @@ export default function VideoGrid() {
                     <VideoGridItem />
 
 
-                    <div className="col-span-12">some error happened</div>
+                    {/* <div className="col-span-12">some error happened</div> */}
                 </div>
             </section>
         </section>

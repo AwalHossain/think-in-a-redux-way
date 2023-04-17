@@ -1,6 +1,8 @@
+import logo from "../../assets/lws.svg";
+import search from "../../assets/search.svg";
 import Search from "./Search";
-
 export default function Navbar() {
+
     return (
         <nav className="bg-slate-100 shadow-md">
             <div
@@ -9,7 +11,7 @@ export default function Navbar() {
                 <a href="/">
                     <img
                         className="h-10"
-                        src="./assets/lws.svg"
+                        src={logo}
                         alt="Learn with Sumit"
                     />
                 </a>
@@ -20,7 +22,7 @@ export default function Navbar() {
 
                     <img
                         className="inline h-4 cursor-pointer"
-                        src="./assets/search.svg"
+                        src={search}
                         alt="Search"
                     />
                 </div>
