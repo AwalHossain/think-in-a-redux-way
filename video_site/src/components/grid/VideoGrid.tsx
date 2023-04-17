@@ -1,6 +1,17 @@
-import VideoGridItem from "./VideoGridItem"
+import { useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { fetchVideos } from "../../features/videos/videosSlice";
+import VideoGridItem from "./VideoGridItem";
 
 export default function VideoGrid() {
+    const state = useAppSelector(state => state.videos);
+    console.log(state, "state");
+
+    const dispatch = useAppDispatch();
+    useEffect(() => {
+        dispatch(fetchVideos());
+    }, [dispatch]);
+
     return (
         <section className="pt-12">
             <section className="pt-12">
