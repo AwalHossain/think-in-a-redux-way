@@ -1,10 +1,15 @@
+import { TagProps } from "./Tags";
 
-export default function Tag() {
+interface Tage {
+    tag: TagProps
+}
+
+export default function Tag({ tag }: Tage) {
     return (
         <div
             className="bg-blue-100 text-blue-600 px-4 py-1 rounded-full cursor-pointer"
         >
-            react
+            {tag?.title}
         </div>
     )
 }
