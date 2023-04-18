@@ -1,5 +1,5 @@
 
-export default function Player() {
+export default function Player({ link, title }: { link: string, title: string }) {
     return (
         <iframe
             width="100%"

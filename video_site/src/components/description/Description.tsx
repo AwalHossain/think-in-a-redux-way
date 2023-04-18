@@ -1,12 +1,32 @@
-import LikeUnlike from './LikeUnlike'
 
-export default function Description() {
+import LikeUnlike from './LikeUnlike';
+
+interface DescriptionProps {
+    video: {
+        id: string;
+        title: string;
+        description: string;
+        thumbnail: string;
+        author: string;
+        avatar: string;
+        views: number;
+        link: string;
+        likes: number;
+        unlikes: number;
+        tags: string[];
+        duration: string;
+        date: string;
+    }
+}
+
+export default function Description({ video }: DescriptionProps) {
+    const { title, description, date } = video;
     return (
         <div>
             <h1
                 className="text-lg font-semibold tracking-tight text-slate-800"
             >
-                Some video title
+                {title}
             </h1>
             <div
                 className="pb-4 flex items-center space-between border-b"
@@ -14,7 +34,7 @@ export default function Description() {
                 <h2
                     className="text-sm leading-[1.7142857] text-slate-600 w-full"
                 >
-                    Uploaded on 23 Nov 2022
+                    Date: {date}
                 </h2>
 
                 <LikeUnlike />
@@ -23,7 +43,7 @@ export default function Description() {
             <div
                 className="mt-4 text-sm text-[#334155] dark:text-slate-400"
             >
-                Some video description here
+                {description}
             </div>
         </div>
     )

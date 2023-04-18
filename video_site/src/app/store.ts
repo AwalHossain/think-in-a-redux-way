@@ -1,6 +1,7 @@
 import { Action, ThunkAction, configureStore } from "@reduxjs/toolkit";
 import counterReducer from "../features/counter/counterSlice";
 import tagsSlice from "../features/tags/tagsSlice";
+import videoSlice from "../features/video/videoSlice";
 import videosSlice from "../features/videos/videosSlice";
 
 export const store = configureStore({
@@ -8,6 +9,7 @@ export const store = configureStore({
     counter: counterReducer,
     videos: videosSlice,
     tags: tagsSlice,
+    video: videoSlice,
   },
 });
 
