@@ -43,7 +43,7 @@ const Video = () => {
                     <Player link={link} title={title} />
                     <Description video={video} />
                 </div>
-                <RelatedVideo />
+                <RelatedVideo currentVideoId={video?.id} tags={tags} />
             </div>
         )
     }

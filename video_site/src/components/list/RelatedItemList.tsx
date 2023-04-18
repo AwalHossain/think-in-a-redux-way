@@ -1,5 +1,22 @@
+interface Video {
+    video: {
+        id: string,
+        title: string,
+        description: string,
+        thumbnail: string,
+        author: string,
+        avatar: string,
+        views: number,
+        link: string,
+        likes: number,
+        unlikes: number,
+        tags: string[],
+        duration: string,
+        date: string
+    }
+}
 
-export default function RelatedItemList() {
+export default function RelatedItemList({ video }: Video) {
     return (
         <div className="w-full flex flex-row gap-2 mb-4">
             <div
