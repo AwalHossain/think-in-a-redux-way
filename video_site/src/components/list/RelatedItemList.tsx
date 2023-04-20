@@ -17,6 +17,7 @@ interface Video {
 }
 
 export default function RelatedItemList({ video }: Video) {
+    const { thumbnail, author, duration, title, views, date } = video
     return (
         <div className="w-full flex flex-row gap-2 mb-4">
             <div
@@ -24,7 +25,7 @@ export default function RelatedItemList({ video }: Video) {
             >
                 <a href="video.html">
                     <img
-                        src="https://i3.ytimg.com/vi/6O4s7v28nlw/maxresdefault.jpg"
+                        src={thumbnail}
                         className="object-cover"
                         alt="Some video title"
                     />
@@ -32,7 +33,7 @@ export default function RelatedItemList({ video }: Video) {
                 <p
                     className="absolute right-2 bottom-2 bg-gray-900 text-gray-100 text-xs px-1 py"
                 >
-                    12:10
+                    {duration}
                 </p>
             </div>
 
@@ -41,17 +42,17 @@ export default function RelatedItemList({ video }: Video) {
                     <p
                         className="text-slate-900 text-sm font-semibold"
                     >
-                        Some video title
+                        {title}
                     </p>
                 </a>
                 <a
                     className="text-gray-400 text-xs mt-2 hover:text-gray-600"
                     href="#/"
                 >
-                    Learn with Sumit
+                    {author}
                 </a>
                 <p className="text-gray-400 text-xs mt-1">
-                    100K views . 23 Oct 2022
+                    {views}. {date}
                 </p>
             </div>
         </div>
