@@ -1,12 +1,14 @@
-
+import like from "../../assets/like.svg";
+import unlike from "../../assets/unlike.svg";
 export default function LikeUnlike() {
+
     return (
         <div className="flex gap-10 w-48">
             <div className="flex gap-1">
                 <div className="shrink-0">
                     <img
                         className="w-5 block"
-                        src="./assets/like.svg"
+                        src={like}
                         alt="Like"
                     />
                 </div>
@@ -20,7 +22,7 @@ export default function LikeUnlike() {
                 <div className="shrink-0">
                     <img
                         className="w-5 block"
-                        src="./assets/unlike.svg"
+                        src={unlike}
                         alt="Unlike"
                     />
                 </div>
