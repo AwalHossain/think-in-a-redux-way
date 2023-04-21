@@ -10,6 +10,11 @@ export interface VideosState {
   error: string | null;
 }
 
+export interface FilterProps {
+  tags: string[];
+  search: string;
+}
+
 const inititalState: VideosState = {
   videos: [],
   status: "idle",
@@ -17,10 +22,13 @@ const inititalState: VideosState = {
   error: null,
 };
 
-export const fetchVideos = createAsyncThunk("videos/fetchVideos", async () => {
-  const videos = await getVideos();
-  return videos;
-});
+export const fetchVideos = createAsyncThunk(
+  "videos/fetchVideos",
+  async ({ tags, search }: FilterProps) => {
+    const videos = await getVideos({ tags, search });
+    return videos;
+  }
+);
 
 const videosSlice = createSlice({
   name: "videos",

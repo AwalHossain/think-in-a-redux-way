@@ -24,11 +24,12 @@ interface Video {
 
 export default function VideoGrid() {
     const { isError, error, status, videos } = useAppSelector(state => state.videos);
+    const { tags, search } = useAppSelector(state => state.filter);
 
     const dispatch = useAppDispatch();
     useEffect(() => {
-        dispatch(fetchVideos());
-    }, [dispatch]);
+        dispatch(fetchVideos({ tags, search }));
+    }, [dispatch, tags, search]);
 
     let content;
 

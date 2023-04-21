@@ -23,7 +23,6 @@ export interface VideoProps {
 
 export default function VideoGridItem({ video }: VideoProps) {
     const { id, title, description, date, thumbnail, author, avatar, views, link, likes, unlikes, tags, duration } = video;
-    console.log(video, "video");
 
     return (
         <div
