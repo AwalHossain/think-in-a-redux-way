@@ -4,7 +4,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 export interface FilterState {
   search: string;
-  tag: string[];
+  tags: string[];
   status: "idle" | "loading" | "failed";
   isError: boolean;
   error: string | null;
@@ -12,7 +12,7 @@ export interface FilterState {
 
 const inititalState: FilterState = {
   search: "",
-  tag: [],
+  tags: [],
   status: "idle",
   isError: false,
   error: null,
@@ -23,14 +23,14 @@ const videoSlice = createSlice({
   initialState: inititalState,
   reducers: {
     tagsSelected: (state, action) => {
-      state.tag.push(action.payload);
+      state.tags.push(action.payload);
     },
     tagRemoved: (state, action) => {
-      const indexToRemove = state.tag.findIndex(
+      const indexToRemove = state.tags.findIndex(
         (tag) => tag === action.payload
       );
       if (indexToRemove !== -1) {
-        state.tag.splice(indexToRemove, 1);
+        state.tags.splice(indexToRemove, 1);
       }
     },
     searched: (state, action) => {
