@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 
 interface Video {
     video: {
@@ -19,7 +19,9 @@ interface Video {
 }
 
 export default function RelatedItemList({ video }: Video) {
-    const { thumbnail, author, duration, title, views, date, id } = video
+    const { thumbnail, author, duration, title, views, date, id } = video || {};
+    console.log(id, "id related");
+
     return (
         <div className="w-full flex flex-row gap-2 mb-4">
             <div
