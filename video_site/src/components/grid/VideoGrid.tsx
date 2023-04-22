@@ -44,7 +44,7 @@ export default function VideoGrid() {
         content = videos.map((video: Video) => <VideoGridItem key={video?.id} video={video} />)
     }
 
-    if (isError && status === "idle") {
+    if (isError && status === "failed") {
         content = <div className="col-span-12">{error}</div>
     }
 

@@ -32,7 +32,7 @@ const Video = () => {
         content = <div className="col-span-12">No video found</div>
     }
 
-    if (isError && status === "idle") {
+    if (isError && status === "failed") {
         content = <div className="col-span-12">{error}</div>
     }
 

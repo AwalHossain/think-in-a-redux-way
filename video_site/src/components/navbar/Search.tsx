@@ -7,14 +7,15 @@ export default function Search() {
     const [search, setSearch] = useState<string>("");
     const dispatch = useAppDispatch();
 
+    const match = useMatch("/");
+    const navigate = useNavigate();
+
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         dispatch(searched(search));
+        if (!match) navigate("/");
     }
 
-    const match = useMatch("/");
-    const navigate = useNavigate();
-    if (!match) navigate("/");
 
 
     return (
