@@ -1,5 +1,4 @@
 import git from '../../images/git.webp';
-
 export default function RelatedPostItem() {
     return (
         <div className="card">

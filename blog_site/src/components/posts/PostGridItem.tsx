@@ -1,12 +1,13 @@
 
+import { Link } from 'react-router-dom'
 import git from '../../images/git.webp'
 
 export default function PostGridItem() {
     return (
         <div className="lws-card">
-            <a href="post.html">
+            <Link to={`blog/${1}`} >
                 <img src={git} className="lws-card-image" alt="" />
-            </a>
+            </Link>
             <div className="p-4">
                 <div className="lws-card-header">
                     <p className="lws-publishedDate">2023-05-01</p>
@@ -14,9 +15,9 @@ export default function PostGridItem() {
                         <i className="fa-regular fa-thumbs-up"></i>100
                     </p>
                 </div>
-                <a href="post.html" className="lws-postTitle">
+                <Link to={`blog/${1}`} className="lws-postTitle">
                     Top Github Alternatives
-                </a>
+                </Link>
                 <div className="lws-tags">
                     <span>#python,</span> <span>#tech,</span> <span>#git</span>
                 </div>
