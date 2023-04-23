@@ -20,7 +20,7 @@ export default function PostGridItem({ blogs }: PostGridItemProps) {
                         <i className="fa-regular fa-thumbs-up"></i>{likes}
                     </p>
                 </div>
-                <Link to={`blog/${1}`} className="lws-postTitle">
+                <Link to={`blog/${id}`} className="lws-postTitle">
                     {title}
                 </Link>
                 <div className="lws-tags">
@@ -29,9 +29,6 @@ export default function PostGridItem({ blogs }: PostGridItemProps) {
                 </div>
 
                 <div className="flex gap-2 mt-4">
-                    {/* create a condition if isSave is true then show the saved button else show the save button */}
-
-                    {/* <span className="lws-badge"> Saved </span> */}
                     {
                         isSaved ? (
 

@@ -17,11 +17,13 @@ export interface BlogProps {
 export interface BlogsState {
   blogs: BlogProps[];
   status: "idle" | "loading" | "failed";
+  error: string | null;
 }
 
 const initialState: BlogsState = {
   blogs: [],
   status: "idle",
+  error: null,
 };
 
 export const fetchBlogs = createAsyncThunk("blogs/fetchBlogs", async () => {
@@ -29,7 +31,7 @@ export const fetchBlogs = createAsyncThunk("blogs/fetchBlogs", async () => {
   return res;
 });
 
-export const blogsSlice = createSlice({
+const blogsSlice = createSlice({
   name: "blogs",
   initialState,
   reducers: {},
@@ -37,14 +39,17 @@ export const blogsSlice = createSlice({
     builder
       .addCase(fetchBlogs.pending, (state, action) => {
         state.status = "loading";
+        state.error = null;
       })
       .addCase(fetchBlogs.fulfilled, (state, action) => {
         state.status = "idle";
         state.blogs = action.payload;
+        state.error = null;
       })
       .addCase(fetchBlogs.rejected, (state, action) => {
         state.status = "failed";
         state.blogs = [];
+        state.error = action.error.message ?? null;
       });
   },
 });

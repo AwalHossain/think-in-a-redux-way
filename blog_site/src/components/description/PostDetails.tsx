@@ -1,7 +1,7 @@
 
 import mern from "../../images/mern.webp";
 
-export default function PostDetails() {
+export default function PostDetails({ blog }: { blog: any }) {
     return (
         <main className="post">
             <img src={mern}
