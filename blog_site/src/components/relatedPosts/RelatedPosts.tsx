@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { fetchTags } from "../../features/tags/tagsSlice";
-import RelatedPostItem from "./RelatedPostItem";
+import RelatedPostItem, { Related } from "./RelatedPostItem";
 
 export interface TagsProps {
     relatedPosts: string[],
@@ -11,7 +11,7 @@ export interface TagsProps {
 export default function RelatedPosts({ currentId, relatedPosts }: TagsProps) {
 
     const dispatch = useAppDispatch();
-    const { tags } = useAppSelector((state) => state.tags)
+    const { tags, status, error } = useAppSelector((state) => state.tags)
 
     useEffect(() => {
         dispatch(fetchTags({ relatedPosts, currentId }))
@@ -22,13 +22,22 @@ export default function RelatedPosts({ currentId, relatedPosts }: TagsProps) {
 
     let content = null;
 
-    if (relatedPosts) {
-        content = tags.map((tag, index) =>
+    if (status === 'idle' && tags.length >= 0) {
+        content = tags.map((tag: Related) =>
             <RelatedPostItem tag={tag} />
         )
-    } else {
+    }
+    if (status === 'loading') {
+        content = <p className="text-center">Loading...</p>
+    }
+    if (status === 'failed') {
+        content = <p className="text-center">{error}</p>
+    }
+    if (tags.length === 0) {
+
         content = <p className="text-center">No related posts found</p>
     }
+
 
 
 

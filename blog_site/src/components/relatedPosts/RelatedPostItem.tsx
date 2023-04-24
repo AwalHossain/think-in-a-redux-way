@@ -1,22 +1,40 @@
-import git from '../../images/git.webp';
-export default function RelatedPostItem({ tag }: any) {
-    // const { } = tag
+import { Link } from "react-router-dom";
+
+export interface Related {
+    id: 0,
+    title: "",
+    description: "",
+    image: "",
+    tags: [],
+    likes: 0,
+    isSaved: false,
+    createdAt: "",
+};
+
+type RelatedPostItemProps = {
+    tag: Related
+}
+
+
+export default function RelatedPostItem({ tag }: RelatedPostItemProps) {
+    const { tags, image, title, createdAt, id } = tag
     console.log(tag, "tag");
 
     return (
         <div className="card">
-            <a href="post.html">
-                <img src={git}
+            <Link to={`/post/${id}`}>
+                <img src={image}
                     className="card-image" alt="" />
-            </a>
+            </Link>
             <div className="p-4">
                 <a href="post.html" className="text-lg post-title lws-RelatedPostTitle">
-                    Top Github Alternatives
+                    {title}
                 </a>
                 <div className="mb-0 tags">
-                    <span>#python,</span> <span>#tech,</span> <span>#git</span>
+                    {/* <span>#python,</span> <span>#tech,</span> <span>#git</span> */}
+                    {tags.map((tag: string) => <span>#{tag},</span>)}
                 </div>
-                <p>2010-03-27</p>
+                <p>{createdAt}</p>
             </div>
         </div>
     )
