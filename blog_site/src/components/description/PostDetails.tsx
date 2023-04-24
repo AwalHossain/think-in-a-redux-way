@@ -1,8 +1,24 @@
 
+import { useAppDispatch } from "../../app/hooks";
 import { BlogProps } from "../../features/blog/blogSlice";
+import { likeBlog, saveBlog } from "../../features/filter/filterSlice";
 
 export default function PostDetails({ blog }: { blog: BlogProps }) {
-    const { title, tags, image, createdAt, description, isSaved } = blog;
+    const { title, tags, image, createdAt, description, isSaved, likes } = blog;
+    const dispatch = useAppDispatch();
+
+    const handleSave = () => {
+        console.log("clicked");
+
+        dispatch(saveBlog(true))
+    }
+
+    const handleLike = (likes: number) => {
+        console.log("clicked", likes);
+        dispatch(likeBlog(likes))
+    }
+
+
     return (
         <main className="post">
             <img src={image}
@@ -20,17 +36,17 @@ export default function PostDetails({ blog }: { blog: BlogProps }) {
                 <div className="btn-group">
                     {/* <!-- handle like on button click --> */}
                     <button className="like-btn" id="lws-singleLinks">
-                        <i className="fa-regular fa-thumbs-up"></i> 100
+                        <i onClick={() => handleLike(likes)} className="fa-regular fa-thumbs-up"></i>
                     </button>
                     {/* <!-- handle save on button click --> */}
                     {/* <!-- use ".active" className and "Saved" text  if a post is saved, other wise "Save" --> */}
                     <button className="active save-btn" id="lws-singleSavedBtn">
                         {
                             isSaved ? (
-                                <span className="lws-badge"> Saved </span>
+                                <span onClick={handleSave} className="lws-badge"> Saved </span>
                             ) : (
 
-                                <i className="fa-regular fa-bookmark"></i>
+                                <i onClick={handleSave} className="fa-regular fa-bookmark"></i>
                             )
                         }
                     </button>

@@ -23,26 +23,19 @@ export const fetchFilter = createAsyncThunk("", async () => {
   return res;
 });
 
-const blogsSlice = createSlice({
+const filterSlice = createSlice({
   name: "tags",
   initialState,
-  reducers: {},
-  extraReducers: (builder) => {
-    builder
-      .addCase(fetchFilter.pending, (state, action) => {
-        state.status = "loading";
-      })
-      .addCase(fetchFilter.fulfilled, (state, action) => {
-        state.status = "idle";
-        state.isSaved = true;
-        state.likes = action.payload.likes;
-      })
-      .addCase(fetchFilter.rejected, (state, action) => {
-        state.status = "failed";
-        state.isSaved = false;
-        state.error = action.error.message ?? null;
-      });
+  reducers: {
+    likeBlog: (state, action) => {
+      state.likes += action.payload;
+    },
+    saveBlog: (state, action) => {
+      //toggle isSaved
+      state.isSaved = !state.isSaved;
+    },
   },
 });
 
-export default blogsSlice.reducer;
+export default filterSlice.reducer;
+export const { likeBlog, saveBlog } = filterSlice.actions;
