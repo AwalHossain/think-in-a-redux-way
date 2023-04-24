@@ -27,7 +27,7 @@ export default function Blog() {
         content = (
             <section className="post-page-container">
                 <PostDetails blog={blog} />
-                <RelatedPosts currentId={blogId} tags={blog?.tags} />
+                <RelatedPosts currentId={blogId} relatedPosts={blog?.tags} />
             </section>
 
         )

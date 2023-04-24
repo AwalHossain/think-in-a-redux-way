@@ -2,12 +2,14 @@ import { Action, ThunkAction, configureStore } from "@reduxjs/toolkit";
 import blogSlice from "../features/blog/blogSlice";
 import blogsSlice from "../features/blogs/blogsSlice";
 import counterReducer from "../features/counter/counterSlice";
+import tagsSlice from "../features/tags/tagsSlice";
 
 export const store = configureStore({
   reducer: {
     counter: counterReducer,
     blogs: blogsSlice,
     blog: blogSlice,
+    tags: tagsSlice,
   },
 });
 

@@ -1,5 +1,8 @@
 import git from '../../images/git.webp';
-export default function RelatedPostItem() {
+export default function RelatedPostItem({ tag }: any) {
+    // const { } = tag
+    console.log(tag, "tag");
+
     return (
         <div className="card">
             <a href="post.html">
