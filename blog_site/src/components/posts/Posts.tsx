@@ -7,9 +7,11 @@ import PostGridItem from "./PostGridItem";
 export default function Posts() {
     const dispatch = useAppDispatch();
     const { blogs, status } = useAppSelector(state => state.blogs)
+    const { filter, sort } = useAppSelector(state => state.filter);
+
     useEffect(() => {
-        dispatch(fetchBlogs())
-    }, [dispatch])
+        dispatch(fetchBlogs({ filter, sort }))
+    }, [dispatch, filter, sort])
     let content = null;
     if (status === "loading") {
         content = <div className="col-span-12">Loading...</div>

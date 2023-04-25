@@ -39,8 +39,8 @@ const initialState: BlogState = {
 
 export const fetchBlog = createAsyncThunk(
   "blog/fetchBlog",
-  async (id: string | undefined) => {
-    const res = await getBlog(id);
+  async ({ blogId }: { blogId: string | undefined }) => {
+    const res = await getBlog(blogId);
     return res;
   }
 );

@@ -15,7 +15,7 @@ export default function Blog() {
 
 
     useEffect(() => {
-        dispatch(fetchBlog(blogId))
+        dispatch(fetchBlog({ blogId }))
     }, [dispatch, blogId])
     let content = null;
     if (status === "loading") {
