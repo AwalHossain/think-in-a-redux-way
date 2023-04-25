@@ -1,50 +1,29 @@
 // blog redux slice
 
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getLikes } from "./filterAPI";
+import { createSlice } from "@reduxjs/toolkit";
 
 export interface FilterState {
-  isSaved: boolean;
-  likes: number;
-  status: "idle" | "loading" | "failed";
-  isError: boolean;
-  error?: string | null;
+  filter: string;
+  sort: string;
 }
 
 const initialState: FilterState = {
-  isSaved: false,
-  isError: false,
-  likes: 0,
-  status: "idle",
+  filter: "all",
+  sort: "default",
 };
-
-export const fetchLikes = createAsyncThunk(
-  "",
-  async ({ id, likes }: { id: number; likes: number }) => {
-    const res = await getLikes(id, likes);
-    return res;
-  }
-);
 
 const filterSlice = createSlice({
   name: "filter",
   initialState,
-  reducers: {},
-  extraReducers: (builder) => {
-    builder
-      .addCase(fetchLikes.pending, (state) => {
-        state.status = "loading";
-      })
-      .addCase(fetchLikes.fulfilled, (state, action) => {
-        state.status = "idle";
-        state.likes = action.payload;
-      })
-      .addCase(fetchLikes.rejected, (state, action) => {
-        state.status = "failed";
-        state.isError = true;
-        state.error = action.error.message;
-      });
+  reducers: {
+    setFilterBy: (state, action) => {
+      state.filter = action.payload;
+    },
+    setSortBy(state, action) {
+      state.sort = action.payload;
+    },
   },
 });
 
 export default filterSlice.reducer;
+export const { setFilterBy, setSortBy } = filterSlice.actions;

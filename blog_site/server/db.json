@@ -24,8 +24,8 @@
         "nodejs",
         "react"
       ],
-      "likes": 16,
-      "isSaved": false,
+      "likes": 7,
+      "isSaved": true,
       "createdAt": "2022-07-15"
     },
     {
@@ -52,7 +52,7 @@
         "testing",
         "programming"
       ],
-      "likes": 26,
+      "likes": 4,
       "isSaved": false,
       "createdAt": "2023-01-25"
     },
