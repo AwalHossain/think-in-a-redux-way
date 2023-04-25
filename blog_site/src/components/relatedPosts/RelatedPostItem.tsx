@@ -18,10 +18,9 @@ type RelatedPostItemProps = {
 
 export default function RelatedPostItem({ tag }: RelatedPostItemProps) {
     const { tags, image, title, createdAt, id } = tag
-    console.log(tag, "tag");
 
     return (
-        <div className="card">
+        <div key={id} className="card">
             <Link to={`/post/${id}`}>
                 <img src={image}
                     className="card-image" alt="" />

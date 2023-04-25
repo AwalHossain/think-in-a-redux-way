@@ -11,6 +11,8 @@ export default function Blog() {
 
     const dispatch = useAppDispatch();
     const { blog, error, status } = useAppSelector(state => state.blog);
+    console.log(blog, "blog");
+
 
     useEffect(() => {
         dispatch(fetchBlog(blogId))

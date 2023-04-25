@@ -7,7 +7,7 @@ interface PostGridItemProps {
 }
 
 export default function PostGridItem({ blogs }: PostGridItemProps) {
-    const { id, title, description, image, likes, tags, isSaved, createdAt } = blogs
+    const { id, title, image, likes, tags, isSaved } = blogs
     return (
         <div className="lws-card">
             <Link to={`blog/${id}`} >

@@ -18,7 +18,7 @@ export default function Posts() {
         content = <div className="col-span-12">No blogs found</div>
     }
     if (status === "idle" && blogs.length > 0) {
-        content = blogs.map((blog: BlogProps) => <PostGridItem key={blog.id} blogs={blog} />)
+        content = blogs?.map((blog: BlogProps) => <PostGridItem key={blog.id} blogs={blog} />)
     }
 
     if (status === "failed") {

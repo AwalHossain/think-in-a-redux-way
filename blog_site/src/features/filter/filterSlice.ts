@@ -1,7 +1,7 @@
 // blog redux slice
 
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getFilterTags } from "./filterAPI";
+import { getLikes } from "./filterAPI";
 
 export interface FilterState {
   isSaved: boolean;
@@ -18,24 +18,33 @@ const initialState: FilterState = {
   status: "idle",
 };
 
-export const fetchFilter = createAsyncThunk("", async () => {
-  const res = await getFilterTags();
-  return res;
-});
+export const fetchLikes = createAsyncThunk(
+  "",
+  async ({ id, likes }: { id: number; likes: number }) => {
+    const res = await getLikes(id, likes);
+    return res;
+  }
+);
 
 const filterSlice = createSlice({
-  name: "tags",
+  name: "filter",
   initialState,
-  reducers: {
-    likeBlog: (state, action) => {
-      state.likes += action.payload;
-    },
-    saveBlog: (state, action) => {
-      //toggle isSaved
-      state.isSaved = !state.isSaved;
-    },
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchLikes.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(fetchLikes.fulfilled, (state, action) => {
+        state.status = "idle";
+        state.likes = action.payload;
+      })
+      .addCase(fetchLikes.rejected, (state, action) => {
+        state.status = "failed";
+        state.isError = true;
+        state.error = action.error.message;
+      });
   },
 });
 
 export default filterSlice.reducer;
-export const { likeBlog, saveBlog } = filterSlice.actions;

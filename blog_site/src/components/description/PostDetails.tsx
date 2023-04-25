@@ -1,23 +1,22 @@
 
 import { useAppDispatch } from "../../app/hooks";
 import { BlogProps } from "../../features/blog/blogSlice";
-import { likeBlog, saveBlog } from "../../features/filter/filterSlice";
+import { fetchLikes } from "../../features/filter/filterSlice";
 
 export default function PostDetails({ blog }: { blog: BlogProps }) {
-    const { title, tags, image, createdAt, description, isSaved, likes } = blog;
+    const { title, tags, image, createdAt, description, isSaved, likes, id } = blog;
+    // console.log(blog, "blog");
+
     const dispatch = useAppDispatch();
 
     const handleSave = () => {
-        console.log("clicked");
-
-        dispatch(saveBlog(true))
+        // dispatch()
     }
 
     const handleLike = (likes: number) => {
         console.log("clicked", likes);
-        dispatch(likeBlog(likes))
+        dispatch(fetchLikes({ id, likes }))
     }
-
 
     return (
         <main className="post">
@@ -36,10 +35,8 @@ export default function PostDetails({ blog }: { blog: BlogProps }) {
                 <div className="btn-group">
                     {/* <!-- handle like on button click --> */}
                     <button className="like-btn" id="lws-singleLinks">
-                        <i onClick={() => handleLike(likes)} className="fa-regular fa-thumbs-up"></i>
+                        <i onClick={() => handleLike(likes)} className="fa-regular fa-thumbs-up">{likes}</i>
                     </button>
-                    {/* <!-- handle save on button click --> */}
-                    {/* <!-- use ".active" className and "Saved" text  if a post is saved, other wise "Save" --> */}
                     <button className="active save-btn" id="lws-singleSavedBtn">
                         {
                             isSaved ? (
