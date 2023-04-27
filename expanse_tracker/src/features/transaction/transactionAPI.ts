@@ -1,11 +1,11 @@
 import axios from "../../utils/axios";
 
-export const fetchTransactions = async () => {
+export const getTransactions = async () => {
   const response = await axios.get("/transactions");
   return response.data;
 };
 
-export const addTransaction = async (transaction: any) => {
+export const saveTransaction = async (transaction: any) => {
   const response = await axios.post("/transactions", transaction);
   return response.data;
 };
@@ -18,7 +18,7 @@ export const updateTransaction = async (transaction: any) => {
   return response.data;
 };
 
-export const deleteTransaction = async (id: number) => {
+export const removeTransaction = async (id: number) => {
   const response = await axios.delete(`/transactions/${id}`);
   return response.data;
 };
