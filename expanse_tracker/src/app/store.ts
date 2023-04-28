@@ -5,7 +5,7 @@ import transactionSlice from "../features/transaction/transactionSlice";
 export const store = configureStore({
   reducer: {
     counter: counterReducer,
-    transaction: transactionSlice,
+    transactions: transactionSlice,
   },
 });
 

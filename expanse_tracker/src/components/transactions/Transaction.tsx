@@ -1,15 +1,20 @@
+import { TransactionInterface } from '../../features/transaction/transactionSlice';
 import del from '../../images/delete.svg';
 import edit from '../../images/edit.svg';
 
+interface TransactionProps {
+    transaction: TransactionInterface;
+}
 
-export default function Transaction() {
+export default function Transaction({ transaction }: TransactionProps) {
+    const { id, name, amount } = transaction;
     return (
-        <div>
+        <div key={id}>
             <ul>
                 <li className="transaction income">
-                    <p>Earned this month</p>
+                    <p>{name}</p>
                     <div className="right">
-                        <p>৳ 100</p>
+                        <p>৳ {amount}</p>
                         <button className="link">
                             <img
                                 className="icon"

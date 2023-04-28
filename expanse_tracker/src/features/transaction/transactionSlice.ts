@@ -6,7 +6,7 @@ import {
   updateTransaction,
 } from "./transactionAPI";
 
-export interface Transaction {
+export interface TransactionInterface {
   id: number;
   name: string;
   type: string;
@@ -14,7 +14,7 @@ export interface Transaction {
 }
 
 interface TransactionState {
-  transactions: Transaction[];
+  transactions: TransactionInterface[];
   loading: boolean;
   error: string | null;
 }
@@ -37,7 +37,7 @@ export const fetchTransactions = createAsyncThunk(
 
 export const addTransaction = createAsyncThunk(
   "transaction/addTransaction",
-  async (transaction: Transaction) => {
+  async (transaction: TransactionInterface) => {
     const newTransaction = await saveTransaction(transaction);
     return newTransaction;
   }
@@ -45,7 +45,7 @@ export const addTransaction = createAsyncThunk(
 
 export const editTransaction = createAsyncThunk(
   "transaction/editTransaction",
-  async (transaction: Transaction) => {
+  async (transaction: TransactionInterface) => {
     const updatedTransaction = await updateTransaction(transaction);
     return updatedTransaction;
   }
