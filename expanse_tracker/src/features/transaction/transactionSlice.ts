@@ -17,13 +17,25 @@ interface TransactionState {
   transactions: TransactionInterface[];
   loading: boolean;
   error: string | null;
+  editing: TransactionInterface;
 }
 
 const initialState: TransactionState = {
   transactions: [],
   loading: false,
   error: null,
+  editing: {
+    id: 0,
+    name: "",
+    type: "",
+    amount: 0,
+  },
 };
+
+interface UpdateTransac {
+  transaction: TransactionInterface;
+  id: number;
+}
 
 // export const fetch
 
@@ -46,6 +58,8 @@ export const addTransaction = createAsyncThunk(
 export const editTransaction = createAsyncThunk(
   "transaction/editTransaction",
   async (transaction: TransactionInterface) => {
+    console.log(transaction, "is it here");
+
     const updatedTransaction = await updateTransaction(transaction);
     return updatedTransaction;
   }
@@ -62,7 +76,19 @@ export const deleteTransaction = createAsyncThunk(
 const transactionSlice = createSlice({
   name: "transaction",
   initialState,
-  reducers: {},
+  reducers: {
+    editingActive: (state, action) => {
+      state.editing = action.payload;
+    },
+    editingInactive: (state, action) => {
+      state.editing = {
+        id: 0,
+        name: "",
+        type: "",
+        amount: 0,
+      };
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchTransactions.pending, (state, action) => {
@@ -124,4 +150,4 @@ const transactionSlice = createSlice({
 });
 
 export default transactionSlice.reducer;
-// export {}
+export const { editingActive, editingInactive } = transactionSlice.actions;

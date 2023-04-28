@@ -2,7 +2,7 @@
   "transactions": [
     {
       "name": "Pendrive",
-      "amount": "500",
+      "amount": 900,
       "type": "expense",
       "id": 3
     },
@@ -17,6 +17,78 @@
       "type": "income",
       "amount": 20000,
       "id": 5
+    },
+    {
+      "id": 4723594,
+      "name": "June Month Salary",
+      "type": "income",
+      "amount": 45000
+    },
+    {
+      "id": 85309087,
+      "name": "July Month Salary",
+      "type": "income",
+      "amount": 45000
+    },
+    {
+      "id": 16741550,
+      "name": "Pendrive",
+      "type": "expense",
+      "amount": 900
+    },
+    {
+      "id": 31491087,
+      "name": "Pendrive",
+      "type": "expense",
+      "amount": 700
+    },
+    {
+      "id": 30821523,
+      "name": "Pendrive",
+      "type": "expense",
+      "amount": 900
+    },
+    {
+      "id": 74212140,
+      "name": "Pendrive",
+      "type": "expense",
+      "amount": 900
+    },
+    {
+      "id": 78161507,
+      "name": "Pendrive",
+      "type": "expense",
+      "amount": 900
+    },
+    {
+      "id": 22551961,
+      "name": "Pendrive",
+      "type": "expense",
+      "amount": 800
+    },
+    {
+      "id": 14648676,
+      "name": "Pendrive",
+      "type": "expense",
+      "amount": 900
+    },
+    {
+      "id": 16482406,
+      "name": "",
+      "type": "",
+      "amount": 0
+    },
+    {
+      "id": 80514991,
+      "name": "Pendrive",
+      "type": "expense",
+      "amount": 900
+    },
+    {
+      "id": 28886220,
+      "name": "Pendrive",
+      "type": "expense",
+      "amount": 900
     }
   ]
 }

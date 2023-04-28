@@ -12,7 +12,9 @@ export const saveTransaction = async (transaction: TransactionInterface) => {
 };
 
 export const updateTransaction = async (transaction: TransactionInterface) => {
-  const response = await axios.put(
+  console.log(transaction, "transaction");
+
+  const response = await axios.patch(
     `/transactions/${transaction.id}`,
     transaction
   );

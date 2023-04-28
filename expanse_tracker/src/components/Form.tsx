@@ -1,22 +1,38 @@
-import React, { useState } from "react";
-import { useAppDispatch } from "../app/hooks";
-import { addTransaction } from "../features/transaction/transactionSlice";
+import React, { useEffect, useState } from "react";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
+import { addTransaction, editTransaction } from "../features/transaction/transactionSlice";
 
 export default function Form() {
 
     const dispatch = useAppDispatch();
 
-
-
     const [name, setName] = useState("");
     const [type, setType] = useState("");
-    const [amount, setAmount] = useState("");
+    const [amount, setAmount] = useState<string | number>("");
+    const [editMode, setEditMode] = useState(false);
 
+    const { editing, transactions } = useAppSelector(state => state.transactions);
     const reset = () => {
         setName("");
         setType("");
         setAmount("");
     }
+
+    useEffect(() => {
+        const { id, type, amount, name } = editing;
+        if (id !== 0) {
+            setName(name);
+            setType(type);
+            setAmount(amount);
+            setEditMode(true);
+        } else {
+            reset();
+            setEditMode(false);
+        }
+
+
+
+    }, [editing])
 
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -32,11 +48,34 @@ export default function Form() {
         reset();
 
     }
+
+    useEffect(() => {
+    }, [dispatch, transactions])
+
+    const handleUpdate = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        console.log(editMode, "checking edit mode");
+
+        const updatedTransaction = {
+            id: editing.id,
+            name,
+            type,
+            amount: +amount,
+        }
+        console.log("checking update transaction");
+
+        dispatch(editTransaction(updatedTransaction));
+        reset();
+    }
+    const cancelEditMode = () => {
+        setEditMode(false);
+        reset();
+    }
     return (
         <div>
             <div className="form">
                 <h3>Add new transaction</h3>
-                <form onSubmit={(e) => handleSubmit(e)}>
+                <form onSubmit={editMode ? handleUpdate : handleSubmit}>
                     <div className="form-group">
                         <label htmlFor="transaction_name">Name</label>
                         <input
@@ -86,11 +125,16 @@ export default function Form() {
                         />
                     </div>
 
-                    <button className="btn">Add Transaction</button>
+                    <button className="btn">
+                        {editMode ? "Update Transaction" : "Add Transaction"}
+                    </button>
 
-                    <button className="btn cancel_edit">Cancel Edit</button>
                 </form>
-
+                {editMode && (
+                    <button className="btn cancel_edit" onClick={cancelEditMode}>
+                        Cancel Edit
+                    </button>
+                )}
             </div>
         </div>
     )
