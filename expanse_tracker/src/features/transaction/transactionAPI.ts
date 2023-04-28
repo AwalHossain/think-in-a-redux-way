@@ -1,16 +1,17 @@
 import axios from "../../utils/axios";
+import { Transaction } from "./transactionSlice";
 
 export const getTransactions = async () => {
   const response = await axios.get("/transactions");
   return response.data;
 };
 
-export const saveTransaction = async (transaction: any) => {
+export const saveTransaction = async (transaction: Transaction) => {
   const response = await axios.post("/transactions", transaction);
   return response.data;
 };
 
-export const updateTransaction = async (transaction: any) => {
+export const updateTransaction = async (transaction: Transaction) => {
   const response = await axios.put(
     `/transactions/${transaction.id}`,
     transaction

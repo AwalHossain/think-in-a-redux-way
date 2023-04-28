@@ -1,6 +1,13 @@
 import React, { useState } from "react";
+import { useAppDispatch } from "../app/hooks";
+import { addTransaction } from "../features/transaction/transactionSlice";
 
 export default function Form() {
+
+    const dispatch = useAppDispatch();
+
+
+
     const [name, setName] = useState("");
     const [type, setType] = useState("");
     const [amount, setAmount] = useState("");
@@ -21,7 +28,8 @@ export default function Form() {
             type,
             amount: +amount,
         }
-        console.log(newTransaction);
+        dispatch(addTransaction(newTransaction));
+        reset();
 
     }
     return (

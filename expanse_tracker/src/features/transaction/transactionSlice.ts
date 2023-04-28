@@ -6,9 +6,10 @@ import {
   updateTransaction,
 } from "./transactionAPI";
 
-interface Transaction {
+export interface Transaction {
   id: number;
-  text: string;
+  name: string;
+  type: string;
   amount: number;
 }
 
