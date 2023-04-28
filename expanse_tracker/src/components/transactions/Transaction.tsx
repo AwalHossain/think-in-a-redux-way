@@ -1,5 +1,5 @@
 import { useAppDispatch } from '../../app/hooks';
-import { TransactionInterface, editingActive } from '../../features/transaction/transactionSlice';
+import { TransactionInterface, deleteTransaction, editingActive } from '../../features/transaction/transactionSlice';
 import del from '../../images/delete.svg';
 import edit from '../../images/edit.svg';
 
@@ -14,6 +14,10 @@ export default function Transaction({ transaction }: TransactionProps) {
         console.log("Edit");
         dispatch(editingActive(transaction))
 
+    }
+    const handdleDelete = () => {
+        console.log("Delete");
+        dispatch(deleteTransaction(id));
     }
     return (
         <div key={id}>
@@ -32,6 +36,7 @@ export default function Transaction({ transaction }: TransactionProps) {
                         </button>
                         <button className="link">
                             <img
+                                onClick={handdleDelete}
                                 className="icon"
                                 src={del}
                                 alt="delete"
