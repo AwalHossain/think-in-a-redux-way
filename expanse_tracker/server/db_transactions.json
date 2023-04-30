@@ -23,6 +23,12 @@
       "name": "June Month Salary",
       "type": "income",
       "amount": 900
+    },
+    {
+      "id": 85889861,
+      "name": "",
+      "type": "",
+      "amount": 0
     }
   ]
 }
