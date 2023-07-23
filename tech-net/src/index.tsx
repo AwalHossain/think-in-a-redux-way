@@ -6,7 +6,7 @@ import { RouterProvider } from 'react-router-dom';
 import './index.css';
 import { store } from './redux/store';
 import reportWebVitals from './reportWebVitals';
-import router from './routes';
+import routes from './routes/routes';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -15,7 +15,7 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
       {/* <App /> */}
-    <RouterProvider router={router} />
+    <RouterProvider router={routes} />
     </Provider>
   </React.StrictMode>
 );
