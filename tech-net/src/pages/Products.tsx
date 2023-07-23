@@ -9,12 +9,19 @@ import { IProduct } from '../types/globalTypes';
 
 export default function Products() {
   const [data, setData] = useState<IProduct[]>([]);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
-    fetch('./data.json')
+    fetch('http://127.0.0.1:9000/products')
       .then((res) => res.json())
-      .then((data) => setData(data));
+      .then((data) => {
+        setData(data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error('Error fetching data:', error);
+        setLoading(false);
+      });
   }, []);
-
   const { toast } = useToast();
 
   //! Dummy Data
@@ -23,22 +30,29 @@ export default function Products() {
   const priceRange = 100;
 
   //! **
-
+  
   const handleSlider = (value: number[]) => {
     console.log(value);
   };
 
   let productsData;
 
-  if (status) {
-    productsData = data.filter(
-      (item) => item.status === true && item.price < priceRange
-    );
-  } else if (priceRange > 0) {
-    productsData = data.filter((item) => item.price < priceRange);
-  } else {
-    productsData = data;
+  if (!loading) {
+    if (status) {
+      productsData = data?.filter(
+        (item) => item.status === true && item.price > priceRange
+        
+        );
+        console.log( productsData,'productsData', data);
+    } else if (priceRange > 0) {
+      productsData = data?.filter((item) => item.price < priceRange);
+    } else {
+      productsData = data;
+    }
   }
+  
+  
+  
 
   return (
     <div className="grid grid-cols-12 max-w-7xl mx-auto relative ">

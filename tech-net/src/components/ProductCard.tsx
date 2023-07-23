@@ -1,4 +1,6 @@
 import { Link } from 'react-router-dom';
+import { addProduct } from '../redux/feature/cart/cartSlice';
+import { useAppDispatch } from '../redux/hooks';
 import { IProduct } from '../types/globalTypes';
 import { Button } from './ui/button';
 import { toast } from './ui/use-toast';
@@ -8,7 +10,11 @@ interface IProps {
 }
 
 export default function ProductCard({ product }: IProps) {
+  console.log(product, 'product');
+  const dispatch = useAppDispatch();
+  
   const handleAddProduct = (product: IProduct) => {
+    dispatch(addProduct(product));
     toast({
       description: 'Product Added',
     });
@@ -16,7 +22,7 @@ export default function ProductCard({ product }: IProps) {
   return (
     <div>
       <div className="rounded-2xl h-[480px] flex flex-col items-start justify-between p-5 overflow-hidden shadow-md border border-gray-100 hover:shadow-2xl hover:scale-[102%] transition-all gap-2">
-        <Link to={`/product-details/${product._id}`} className="w-full">
+        <Link to={`/product-details/${product?._id}`} className="w-full">
           <img src={product?.image} alt="product" />
           <h1 className="text-xl font-semibold">{product?.name}</h1>
         </Link>
