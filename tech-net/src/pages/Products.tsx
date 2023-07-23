@@ -1,17 +1,17 @@
 
-import { useEffect, useState } from 'react';
 import ProductCard from '../components/ProductCard';
 import { Label } from '../components/ui/label';
 import { Slider } from '../components/ui/slider';
 import { Switch } from '../components/ui/switch';
 import { useToast } from '../components/ui/use-toast';
+import { useGetProductsQuery } from '../redux/feature/api/apiSlice';
 import { setPriceRange, toogleStatus } from '../redux/feature/products/productSlice';
 import { useAppDispatch, useAppSelector } from '../redux/hooks';
 import { IProduct } from '../types/globalTypes';
 
 export default function Products() {
-  const [data, setData] = useState<IProduct[]>([]);
-  const [loading, setLoading] = useState(true);
+  // const [data, setData] = useState<IProduct[]>([]);
+  // const [loading, setLoading] = useState(true);
 
   const dispatch = useAppDispatch();
 
@@ -19,18 +19,21 @@ export default function Products() {
 
 
 
-  useEffect(() => {
-    fetch('http://127.0.0.1:9000/products')
-      .then((res) => res.json())
-      .then((data) => {
-        setData(data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error('Error fetching data:', error);
-        setLoading(false);
-      });
-  }, []);
+  // useEffect(() => {
+  //   fetch('http://127.0.0.1:9000/products')
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setData(data);
+  //       setLoading(false);
+  //     })
+  //     .catch((error) => {
+  //       console.error('Error fetching data:', error);
+  //       setLoading(false);
+  //     });
+  // }, []);
+
+  const {data, isLoading,isError} = useGetProductsQuery(undefined)
+
   const { toast } = useToast();
 
   //! Dummy Data
@@ -49,15 +52,15 @@ export default function Products() {
 
   let productsData;
 
-  if (!loading) {
+  if (!isLoading && !isError) {
     if (status) {
       productsData = data?.filter(
-        (item) => item.status === true && item.price > priceRange
+        (item: { status: boolean; price: number; }) => item.status === true && item.price > priceRange
         
         );
         console.log( productsData,'productsData', data);
     } else if (priceRange > 0) {
-      productsData = data?.filter((item) => item.price > priceRange);
+      productsData = data?.filter((item: { price: number; }) => item.price > priceRange);
     } else {
       productsData = data;
     }
@@ -93,7 +96,7 @@ export default function Products() {
         </div>
       </div>
       <div className="col-span-9 grid grid-cols-3 gap-10 pb-20">
-        {productsData?.map((product) => (
+        {productsData?.map((product: IProduct) => (
           <ProductCard product={product} />
         ))}
       </div>
