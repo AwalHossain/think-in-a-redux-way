@@ -18,7 +18,7 @@ const client = new MongoClient(uri, {
 });
 const run = async () => {
   try {
-    const check =  await client.connect();
+    // const check =  await client.connect();
       const db = client.db('blog-site');
     //   console.log(check,"check");
     const blogsCollection = db.collection('blogs');
@@ -38,18 +38,25 @@ const run = async () => {
       res.send(result);
     });
 
-    app.get('/product/:id', async (req, res) => {
+    app.get('/blog/:id', async (req, res) => {
       const id = req.params.id;
-
-      const result = await blogsCollection.findOne({ _id: ObjectId(id) });
+      console.log(id, 'id');
+console.log((id), 'ObjectId(id)');
+      const result = await blogsCollection.findOne({ _id: new ObjectId(id) });
       console.log(result);
       res.send(result);
     });
 
-    app.delete('/product/:id', async (req, res) => {
+    app.patch('/blog/:id', async (req, res) => {
       const id = req.params.id;
+    const data = req.body;
+    console.log(data, 'data');
+      const result = await blogsCollection.findOneAndUpdate(
+        ({ _id: new ObjectId(id) }),
+            { $set: data},
+        { returnOriginal: false }
 
-      const result = await blogsCollection.deleteOne({ _id: ObjectId(id) });
+      );
       console.log(result);
       res.send(result);
     });
