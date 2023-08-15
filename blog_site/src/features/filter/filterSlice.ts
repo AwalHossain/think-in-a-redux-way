@@ -17,6 +17,8 @@ const filterSlice = createSlice({
   initialState,
   reducers: {
     setFilterBy: (state, action) => {
+      console.log("setFilterBy", action.payload);
+      
       state.filter = action.payload;
     },
     setSortBy(state, action) {

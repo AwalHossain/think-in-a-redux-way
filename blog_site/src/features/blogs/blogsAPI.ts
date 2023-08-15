@@ -12,9 +12,9 @@ export const getBlogs = async (filter: string, sort: string) => {
 
   // Apply sort
   if (sort === "newest") {
-    queryString += `?${queryString ? "&" : ""}_sort=createdAt&_order=desc`;
+    queryString += `?${queryString ? "&" : ""}_sort=newest`;
   } else if (sort === "most_liked") {
-    queryString += `?${queryString ? "&" : ""}_sort=likes&_order=desc`;
+    queryString += `?${queryString ? "&" : ""}_sort=most_liked`;
   }
 
   const response = await axios.get(`/blogs${queryString}`);

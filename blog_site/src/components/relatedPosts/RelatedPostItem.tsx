@@ -17,11 +17,11 @@ type RelatedPostItemProps = {
 
 
 export default function RelatedPostItem({ tag }: RelatedPostItemProps) {
-    const { tags, image, title, createdAt, id } = tag
+    const { tags, image, title, createdAt, id: _id } = tag
 
     return (
-        <div key={id} className="card">
-            <Link to={`/post/${id}`}>
+        <div key={_id} className="card">
+            <Link to={`/post/${_id}`}>
                 <img src={image}
                     className="card-image" alt="" />
             </Link>

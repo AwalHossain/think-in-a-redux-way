@@ -5,6 +5,7 @@ import { getBlogs } from "./blogsAPI";
 
 export interface BlogProps {
   id: number;
+  _id: number;
   title: string;
   description: string;
   image: string;

@@ -4,7 +4,7 @@ import { BlogProps } from "../../features/blog/blogSlice";
 import axios from "../../features/utils/axios";
 
 export default function PostDetails({ blog }: { blog: BlogProps }) {
-    let { title, tags, image, createdAt, description, isSaved, id, likes } = blog;
+    let { title, tags, image, createdAt, description, isSaved, _id, likes } = blog;
     const [like, setLike] = useState(0);
     const [saved, setSaved] = useState(false)
 
@@ -19,15 +19,16 @@ export default function PostDetails({ blog }: { blog: BlogProps }) {
 
     const handleLike = async (likes: number) => {
         setLike(pre => pre + 1)
-        await axios.patch(`/blogs/${id}`, {
+        await axios.patch(`/blog/${_id}`, {
             likes: likes + 1
         })
-
+        console.log(likes,'likes');
+        
     }
 
     const handleSave = async () => {
         setSaved(pre => !pre)
-        await axios.patch(`/blogs/${id}`, {
+        await axios.patch(`/blog/${_id}`, {
             isSaved: !saved
         })
     }

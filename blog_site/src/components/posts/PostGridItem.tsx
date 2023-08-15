@@ -1,16 +1,18 @@
 
-import { Link } from 'react-router-dom'
-import { BlogProps } from '../../features/blogs/blogsSlice'
+import { Link } from 'react-router-dom';
+import { BlogProps } from '../../features/blogs/blogsSlice';
 
 interface PostGridItemProps {
     blogs: BlogProps
 }
 
 export default function PostGridItem({ blogs }: PostGridItemProps) {
-    const { id, title, image, likes, tags, isSaved } = blogs
+    const { _id, title, image, likes, tags, isSaved } = blogs
+    console.log(blogs._id,'_id');
+    
     return (
         <div className="lws-card">
-            <Link to={`blog/${id}`} >
+            <Link to={`blog/${_id}`} >
                 <img src={image} className="lws-card-image" alt="" />
             </Link>
             <div className="p-4">
@@ -20,7 +22,7 @@ export default function PostGridItem({ blogs }: PostGridItemProps) {
                         <i className="fa-regular fa-thumbs-up"></i>{likes}
                     </p>
                 </div>
-                <Link to={`blog/${id}`} className="lws-postTitle">
+                <Link to={`blog/${_id}`} className="lws-postTitle">
                     {title}
                 </Link>
                 <div className="lws-tags">

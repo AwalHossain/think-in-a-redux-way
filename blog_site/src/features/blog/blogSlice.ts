@@ -4,7 +4,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { getBlog } from "./blogAPI";
 
 export interface BlogProps {
-  id: number;
+  _id: number;
   title: string;
   description: string;
   image: string;
@@ -21,7 +21,7 @@ export interface BlogState {
 }
 
 const obj = {
-  id: 0,
+  _id: 0,
   title: "",
   description: "",
   image: "",
