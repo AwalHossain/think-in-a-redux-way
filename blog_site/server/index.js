@@ -28,6 +28,7 @@ const run = async () => {
           const query = req.query;
           const filter = {};
       
+          console.log(Array.isArray(query.tags_like) , 'tags', query.tags_like);
           // Handle specific query parameters
           if (query.tags_like) {
             const tags = Array.isArray(query.tags_like) ? query.tags_like : [query.tags_like];
@@ -75,7 +76,7 @@ console.log((id), 'ObjectId(id)');
                 { _id: new ObjectId(id) },
                 { $set: data },
                 {
-                    returnDocument: true,
+                    returnDocument: 'after',
                 }
               );
               
