@@ -10,7 +10,7 @@
         "nodejs",
         "react"
       ],
-      "likes": 8,
+      "likes": 9,
       "isSaved": false,
       "createdAt": "2020-07-15"
     },
@@ -96,7 +96,7 @@
         "Algo"
       ],
       "likes": 184,
-      "isSaved": false,
+      "isSaved": true,
       "createdAt": "2023-01-13"
     },
     {
