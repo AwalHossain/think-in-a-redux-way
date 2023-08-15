@@ -24,11 +24,30 @@ const run = async () => {
     const blogsCollection = db.collection('blogs');
 
     app.get('/blogs', async (req, res) => {
-      const cursor = blogsCollection.find({});
-      const product = await cursor.toArray();
-
-      res.send({ status: true, data: product });
-    });
+        try {
+          const query = req.query;
+          const filter = {};
+      
+          // Handle specific query parameters
+          if (query.tags_like) {
+            const tags = Array.isArray(query.tags_like) ? query.tags_like : [query.tags_like];
+            filter.tags = { $in: tags };
+          }
+      
+          if (query.id_ne) {
+            filter.id = { $ne: (query.id_ne) };
+          }
+      
+          // Fetch data based on filter
+          const result = await blogsCollection.find(filter).limit(parseInt(query._limit) || 5).toArray();
+      
+          res.json(result);
+        } catch (error) {
+          console.error(error);
+          res.status(500).send('Error fetching blogs');
+        }
+      });
+      
 
     app.post('/product', async (req, res) => {
       const product = req.body;
@@ -48,18 +67,28 @@ console.log((id), 'ObjectId(id)');
     });
 
     app.patch('/blog/:id', async (req, res) => {
-      const id = req.params.id;
-    const data = req.body;
-    console.log(data, 'data');
-      const result = await blogsCollection.findOneAndUpdate(
-        ({ _id: new ObjectId(id) }),
-            { $set: data},
-        { returnOriginal: false }
-
-      );
-      console.log(result);
-      res.send(result);
-    });
+        const id = req.params.id;
+        const data = req.body;
+        console.log(data, 'data');
+        try {
+            const result = await blogsCollection.findOneAndUpdate(
+                { _id: new ObjectId(id) },
+                { $set: data },
+                {
+                    returnDocument: true,
+                }
+              );
+              
+              if (result.modifiedCount === 1) {
+                res.send({ message: 'Document updated successfully' });
+              } else {
+                res.status(404).send({ error: result });
+              }
+        } catch (error) {
+          console.error(error);
+          res.status(500).send({ error: 'Internal server error' });
+        }
+      });
 
     app.post('/comment/:id', async (req, res) => {
       const productId = req.params.id;
