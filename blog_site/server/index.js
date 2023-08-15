@@ -36,11 +36,19 @@ const run = async () => {
           }
       
           if (query.id_ne) {
-            filter.id = { $ne: (query.id_ne) };
+            filter._id = { $ne: new ObjectId(query.id_ne) };
           }
+          console.log(filter, 'filter');
+          // sort
+          let sortCriteria = {};
+            if (query._sort === 'newest') {
+             sortCriteria = {createdAt: -1}
+            } else if(query._sort === 'most_liked') {
+                sortCriteria = {likes: -1}
+            }
       
           // Fetch data based on filter
-          const result = await blogsCollection.find(filter).limit(parseInt(query._limit) || 5).toArray();
+          const result = await blogsCollection.find(filter).sort(sortCriteria).limit(parseInt(query._limit) || 5).toArray();
       
           res.json(result);
         } catch (error) {
