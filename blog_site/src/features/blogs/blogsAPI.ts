@@ -9,7 +9,8 @@ export const getBlogs = async (filter: string, sort: string) => {
   }
 
   // Apply sort
-
+  console.log(queryString,'filter');
+  
   // Apply sort
   if (sort === "newest") {
     queryString += `?${queryString ? "&" : ""}_sort=newest`;

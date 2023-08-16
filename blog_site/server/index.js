@@ -28,25 +28,27 @@ const run = async () => {
           const query = req.query;
           const filter = {};
       
-          console.log(Array.isArray(query.tags_like) , 'tags', query.tags_like);
           // Handle specific query parameters
           if (query.tags_like) {
             const tags = Array.isArray(query.tags_like) ? query.tags_like : [query.tags_like];
             filter.tags = { $in: tags };
           }
+
+          if(query.isSaved_like) {
+            filter.isSaved =Boolean( query.isSaved_like);
+          }
       
           if (query.id_ne) {
             filter._id = { $ne: new ObjectId(query.id_ne) };
           }
-          console.log(filter, 'filter');
           // sort
           let sortCriteria = {};
-            if (query._sort === 'newest') {
-             sortCriteria = {createdAt: -1}
-            } else if(query._sort === 'most_liked') {
-                sortCriteria = {likes: -1}
-            }
-      
+          if (query._sort === 'newest') {
+            sortCriteria = {createdAt: -1}
+          } else if(query._sort === 'most_liked') {
+            sortCriteria = {likes: -1}
+          }
+          console.log(filter,'filter');
           // Fetch data based on filter
           const result = await blogsCollection.find(filter).sort(sortCriteria).limit(parseInt(query._limit) || 5).toArray();
       
@@ -88,11 +90,7 @@ console.log((id), 'ObjectId(id)');
                 }
               );
               
-              if (result.modifiedCount === 1) {
-                res.send({ message: 'Document updated successfully' });
-              } else {
-                res.status(404).send({ error: result });
-              }
+            res.json(result.value);
         } catch (error) {
           console.error(error);
           res.status(500).send({ error: 'Internal server error' });
