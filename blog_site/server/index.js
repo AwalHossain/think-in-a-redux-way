@@ -19,46 +19,46 @@ const client = new MongoClient(uri, {
 const run = async () => {
   try {
     // const check =  await client.connect();
-      const db = client.db('blog-site');
+    const db = client.db('blog-site');
     //   console.log(check,"check");
     const blogsCollection = db.collection('blogs');
 
     app.get('/blogs', async (req, res) => {
-        try {
-          const query = req.query;
-          const filter = {};
-      
-          // Handle specific query parameters
-          if (query.tags_like) {
-            const tags = Array.isArray(query.tags_like) ? query.tags_like : [query.tags_like];
-            filter.tags = { $in: tags };
-          }
+      try {
+        const query = req.query;
+        const filter = {};
 
-          if(query.isSaved_like) {
-            filter.isSaved =Boolean( query.isSaved_like);
-          }
-      
-          if (query.id_ne) {
-            filter._id = { $ne: new ObjectId(query.id_ne) };
-          }
-          // sort
-          let sortCriteria = {};
-          if (query._sort === 'newest') {
-            sortCriteria = {createdAt: -1}
-          } else if(query._sort === 'most_liked') {
-            sortCriteria = {likes: -1}
-          }
-          console.log(filter,'filter');
-          // Fetch data based on filter
-          const result = await blogsCollection.find(filter).sort(sortCriteria).limit(parseInt(query._limit) || 5).toArray();
-      
-          res.json(result);
-        } catch (error) {
-          console.error(error);
-          res.status(500).send('Error fetching blogs');
+        // Handle specific query parameters
+        if (query.tags_like) {
+          const tags = Array.isArray(query.tags_like) ? query.tags_like : [query.tags_like];
+          filter.tags = { $in: tags };
         }
-      });
-      
+
+        if (query.isSaved_like) {
+          filter.isSaved = Boolean(query.isSaved_like);
+        }
+
+        if (query.id_ne) {
+          filter._id = { $ne: new ObjectId(query.id_ne) };
+        }
+        // sort
+        let sortCriteria = {};
+        if (query._sort === 'newest') {
+          sortCriteria = { createdAt: -1 }
+        } else if (query._sort === 'most_liked') {
+          sortCriteria = { likes: -1 }
+        }
+        console.log(filter, 'filter');
+        // Fetch data based on filter
+        const result = await blogsCollection.find(filter).sort(sortCriteria).limit(parseInt(query._limit) || 5).toArray();
+
+        res.json(result);
+      } catch (error) {
+        console.error(error);
+        res.status(500).send('Error fetching blogs');
+      }
+    });
+
 
     app.post('/product', async (req, res) => {
       const product = req.body;
@@ -71,31 +71,31 @@ const run = async () => {
     app.get('/blog/:id', async (req, res) => {
       const id = req.params.id;
       console.log(id, 'id');
-console.log((id), 'ObjectId(id)');
+      console.log((id), 'ObjectId(id)');
       const result = await blogsCollection.findOne({ _id: new ObjectId(id) });
       console.log(result);
       res.send(result);
     });
 
     app.patch('/blog/:id', async (req, res) => {
-        const id = req.params.id;
-        const data = req.body;
-        console.log(data, 'data');
-        try {
-            const result = await blogsCollection.findOneAndUpdate(
-                { _id: new ObjectId(id) },
-                { $set: data },
-                {
-                    returnDocument: 'after',
-                }
-              );
-              
-            res.json(result.value);
-        } catch (error) {
-          console.error(error);
-          res.status(500).send({ error: 'Internal server error' });
-        }
-      });
+      const id = req.params.id;
+      const data = req.body;
+      console.log(data, 'data');
+      try {
+        const result = await blogsCollection.findOneAndUpdate(
+          { _id: new ObjectId(id) },
+          { $set: data },
+          {
+            returnDocument: 'after',
+          }
+        );
+
+        res.json(result.value);
+      } catch (error) {
+        console.error(error);
+        res.status(500).send({ error: 'Internal server error' });
+      }
+    });
 
     app.post('/comment/:id', async (req, res) => {
       const productId = req.params.id;
@@ -121,6 +121,7 @@ console.log((id), 'ObjectId(id)');
       res.json({ message: 'Comment added successfully' });
     });
 
+    
     app.get('/comment/:id', async (req, res) => {
       const productId = req.params.id;
 
@@ -136,25 +137,7 @@ console.log((id), 'ObjectId(id)');
       }
     });
 
-    // app.post('/user', async (req, res) => {
-    //   const user = req.body;
 
-    //   const result = await userCollection.insertOne(user);
-
-    //   res.send(result);
-    // });
-
-    // app.get('/user/:email', async (req, res) => {
-    //   const email = req.params.email;
-
-    //   const result = await userCollection.findOne({ email });
-
-    //   if (result?.email) {
-    //     return res.send({ status: true, data: result });
-    //   }
-
-    //   res.send({ status: false });
-    // });
   } finally {
   }
 };

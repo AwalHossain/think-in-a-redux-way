@@ -20,9 +20,8 @@ export default function PostDetails({ blog }: { blog: BlogProps }) {
     const handleLike = async (likes: number) => {
         setLike(pre => pre + 1)
         await axios.patch(`/blog/${_id}`, {
-            likes: likes + 1
+            likes: like + 1
         })
-        console.log(likes,'likes');
         
     }
 
