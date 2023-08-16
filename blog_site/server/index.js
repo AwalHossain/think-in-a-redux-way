@@ -50,7 +50,7 @@ const run = async () => {
         }
         console.log(filter, 'filter');
         // Fetch data based on filter
-        const result = await blogsCollection.find(filter).sort(sortCriteria).limit(parseInt(query._limit) || 5).toArray();
+        const result = await blogsCollection.find(filter).sort(sortCriteria).limit(parseInt(query._limit) || 10).toArray();
 
         res.json(result);
       } catch (error) {
@@ -121,7 +121,7 @@ const run = async () => {
       res.json({ message: 'Comment added successfully' });
     });
 
-    
+
     app.get('/comment/:id', async (req, res) => {
       const productId = req.params.id;
 

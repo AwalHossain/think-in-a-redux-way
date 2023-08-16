@@ -921,19 +921,18 @@ p {
 .post-container {
   display: grid;
   gap: 2rem;
-}
 
-@media (min-width: 768px) {
-  .post-container {
+  @media (min-width: 768px) {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-}
 
-@media (min-width: 1280px) {
-  .post-container {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+  @media (min-width: 1280px) {
+    grid-template-columns: repeat(3, minmax(300px, 1fr)); /* Show 3 columns for 1280px and above */
+    gap: 1rem;
+    justify-items: center; /* Center the items horizontally */
   }
 }
+
 
 .post {
   display: flex;
@@ -1002,11 +1001,12 @@ p {
 }
 
 .lws-card-image {
-  aspect-ratio: 16 / 9;
-  width: 100%;
-  -o-object-fit: cover;
-  object-fit: cover;
+  width: 100%; /* Set the image width to 100% of its container */
+  max-width: 100%; /* Ensure the image doesn't exceed its container's width */
+  max-height: 100%; /* Ensure the image doesn't exceed its container's height */
+  object-fit: contain; /* Fit the image inside the container while maintaining aspect ratio */
 }
+
 
 .lws-card-header {
   margin-bottom: 0.25rem;
