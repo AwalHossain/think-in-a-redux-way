@@ -1,5 +1,6 @@
 
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import { BlogProps } from "../../features/blog/blogSlice";
 import axios from "../../features/utils/axios";
 
@@ -7,7 +8,7 @@ export default function PostDetails({ blog }: { blog: BlogProps }) {
     let { title, tags, image, createdAt, description, isSaved, _id, likes } = blog;
     const [like, setLike] = useState(0);
     const [saved, setSaved] = useState(false)
-
+    const audio = new Audio('/notification.mp3')
     useEffect(() => {
         setSaved(isSaved)
     }, [isSaved])
@@ -22,7 +23,8 @@ export default function PostDetails({ blog }: { blog: BlogProps }) {
         await axios.patch(`/blog/${_id}`, {
             likes: like + 1
         })
-        
+        toast.success('Post liked!');
+        audio.play()
     }
 
     const handleSave = async () => {
@@ -30,6 +32,13 @@ export default function PostDetails({ blog }: { blog: BlogProps }) {
         await axios.patch(`/blog/${_id}`, {
             isSaved: !saved
         })
+        if (saved) {
+            toast.success('Post unsaved!');
+            audio.play()
+          } else {
+            toast.success('Post saved!');
+            audio.play()
+          }
     }
 
     return (
@@ -40,11 +49,13 @@ export default function PostDetails({ blog }: { blog: BlogProps }) {
                 <h1 className="mt-6 text-2xl post-title" id="lws-singleTitle">
                     {title}
                 </h1>
-                <div className="tags" id="lws-singleTags">
+                <div className="tags" id="lws-singleTags" style={{marginBottom:"5px"}}>
                     {/* <span>#python,</span> <span>#tech,</span> <span>#git</span> */}
+                    <p >{createdAt   }</p>
                     {tags?.map((tag, index) => (
                         <span key={index}>#{tag},</span>
                     ))}
+
                 </div>
                 <div className="btn-group">
                     {/* <!-- handle like on button click --> */}

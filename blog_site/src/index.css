@@ -1228,3 +1228,44 @@ p {
     var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate)
     var(--tw-sepia) var(--tw-drop-shadow);
 }
+
+
+
+
+.like-btn {
+  background-color: #fff;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  margin-right: 1rem;
+  outline: none;
+  padding: 0;
+  transition: color 0.2s ease-in-out;
+}
+
+.like-btn:hover {
+  color: #3b82f6;
+}
+
+.save-btn {
+  background-color: #fff;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  outline: none;
+  padding: 0;
+  transition: color 0.2s ease-in-out;
+}
+
+.save-btn:hover {
+  color: #3b82f6;
+}
+
+.lws-badge {
+  background-color: #3b82f6;
+  border-radius: 0.25rem;
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 0.25rem 0.5rem;
+}
