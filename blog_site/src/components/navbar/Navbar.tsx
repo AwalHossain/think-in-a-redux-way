@@ -6,7 +6,7 @@ export default function Navbar() {
             <div className="navbar-container">
 
                 <div className="logo">
-                    <a href="index.html">
+                    <a href="/">
                         <img src={logo} alt="search" />
                     </a>
                 </div>

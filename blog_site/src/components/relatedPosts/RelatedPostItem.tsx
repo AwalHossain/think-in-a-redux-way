@@ -1,14 +1,14 @@
 import { Link } from "react-router-dom";
 
 export interface Related {
-    id: 0,
-    title: "",
-    description: "",
-    image: "",
-    tags: [],
-    likes: 0,
-    isSaved: false,
-    createdAt: "",
+    _id: string,
+    title: string,
+    description: string,
+    image: string,
+    tags: string[],
+    likes: number,
+    isSaved: boolean,
+    createdAt: string,
 };
 
 type RelatedPostItemProps = {
@@ -17,18 +17,18 @@ type RelatedPostItemProps = {
 
 
 export default function RelatedPostItem({ tag }: RelatedPostItemProps) {
-    const { tags, image, title, createdAt, id: _id } = tag
+    const { tags, image, title, createdAt, _id } = tag
 
     return (
         <div key={_id} className="card">
-            <Link to={`/post/${_id}`}>
+            <Link to={`/blog/${_id}`}>
                 <img src={image}
                     className="card-image" alt="" />
             </Link>
             <div className="p-4">
-                <a href="post.html" className="text-lg post-title lws-RelatedPostTitle">
+                <Link to={`/blog/${_id}`} className="text-lg post-title lws-RelatedPostTitle">
                     {title}
-                </a>
+                </Link>
                 <div className="mb-0 tags">
                     {/* <span>#python,</span> <span>#tech,</span> <span>#git</span> */}
                     {tags.map((tag: string) => <span>#{tag},</span>)}

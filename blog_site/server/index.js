@@ -16,11 +16,10 @@ const client = new MongoClient(uri, {
   useUnifiedTopology: true,
   serverApi: ServerApiVersion.v1,
 });
+
 const run = async () => {
   try {
-    // const check =  await client.connect();
     const db = client.db('blog-site');
-    //   console.log(check,"check");
     const blogsCollection = db.collection('blogs');
 
     app.get('/blogs', async (req, res) => {
@@ -41,6 +40,7 @@ const run = async () => {
         if (query.id_ne) {
           filter._id = { $ne: new ObjectId(query.id_ne) };
         }
+
         // sort
         let sortCriteria = {};
         if (query._sort === 'newest') {
@@ -48,7 +48,7 @@ const run = async () => {
         } else if (query._sort === 'most_liked') {
           sortCriteria = { likes: -1 }
         }
-        console.log(filter, 'filter');
+
         // Fetch data based on filter
         const result = await blogsCollection.find(filter).sort(sortCriteria).limit(parseInt(query._limit) || 10).toArray();
 
@@ -58,7 +58,6 @@ const run = async () => {
         res.status(500).send('Error fetching blogs');
       }
     });
-
 
     app.post('/product', async (req, res) => {
       const product = req.body;
@@ -70,17 +69,16 @@ const run = async () => {
 
     app.get('/blog/:id', async (req, res) => {
       const id = req.params.id;
-      console.log(id, 'id');
-      console.log((id), 'ObjectId(id)');
+
       const result = await blogsCollection.findOne({ _id: new ObjectId(id) });
-      console.log(result);
+
       res.send(result);
     });
 
     app.patch('/blog/:id', async (req, res) => {
       const id = req.params.id;
       const data = req.body;
-      console.log(data, 'data');
+
       try {
         const result = await blogsCollection.findOneAndUpdate(
           { _id: new ObjectId(id) },
@@ -101,15 +99,10 @@ const run = async () => {
       const productId = req.params.id;
       const comment = req.body.comment;
 
-      console.log(productId);
-      console.log(comment);
-
       const result = await blogsCollection.updateOne(
         { _id: ObjectId(productId) },
         { $push: { comments: comment } }
       );
-
-      console.log(result);
 
       if (result.modifiedCount !== 1) {
         console.error('Product not found or comment not added');
@@ -117,10 +110,8 @@ const run = async () => {
         return;
       }
 
-      console.log('Comment added successfully');
       res.json({ message: 'Comment added successfully' });
     });
-
 
     app.get('/comment/:id', async (req, res) => {
       const productId = req.params.id;
@@ -136,7 +127,6 @@ const run = async () => {
         res.status(404).json({ error: 'Product not found' });
       }
     });
-
 
   } finally {
   }
