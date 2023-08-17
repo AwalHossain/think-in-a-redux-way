@@ -20,7 +20,8 @@ const client = new MongoClient(uri, {
 const run = async () => {
   try {
     const db = client.db('video-site');
-    const blogsCollection = db.collection('videos');
+    const videoCollection = db.collection('videos');
+    const tagCollection = db.collection('tags');
 
     app.get('/videos', async (req, res) => {
       try {
@@ -37,6 +38,17 @@ const run = async () => {
           filter.isSaved = Boolean(query.isSaved_like);
         }
 
+        // Handle search query parameter
+        if (query.q) {
+            const searchRegex = new RegExp(query.q, 'i');
+            filter.$or = [
+            { title: searchRegex },
+            { author: searchRegex },
+            { tags: searchRegex }
+            ];
+        }
+
+
         if (query.id_ne) {
           filter._id = { $ne: new ObjectId(query.id_ne) };
         }
@@ -50,7 +62,7 @@ const run = async () => {
         }
 
         // Fetch data based on filter
-        const result = await blogsCollection.find(filter).sort(sortCriteria).limit(parseInt(query._limit) || 10).toArray();
+        const result = await videoCollection.find(filter).sort(sortCriteria).limit(parseInt(query._limit) || 10).toArray();
 
         res.json(result);
       } catch (error) {
@@ -62,7 +74,7 @@ const run = async () => {
     app.post('/videos', async (req, res) => {
       const product = req.body;
 
-      const result = await blogsCollection.insertOne(product);
+      const result = await videoCollection.insertOne(product);
 
       res.send(result);
     });
@@ -70,7 +82,7 @@ const run = async () => {
     app.get('/video/:id', async (req, res) => {
       const id = req.params.id;
 
-      const result = await blogsCollection.findOne({ _id: new ObjectId(id) });
+      const result = await videoCollection.findOne({ _id: new ObjectId(id) });
 
       res.send(result);
     });
@@ -80,7 +92,7 @@ const run = async () => {
       const data = req.body;
 
       try {
-        const result = await blogsCollection.findOneAndUpdate(
+        const result = await videoCollection.findOneAndUpdate(
           { _id: new ObjectId(id) },
           { $set: data },
           {
@@ -99,7 +111,7 @@ const run = async () => {
       const productId = req.params.id;
       const comment = req.body.comment;
 
-      const result = await blogsCollection.updateOne(
+      const result = await videoCollection.updateOne(
         { _id: ObjectId(productId) },
         { $push: { comments: comment } }
       );
@@ -113,13 +125,10 @@ const run = async () => {
       res.json({ message: 'Comment added successfully' });
     });
 
-    app.get('/video/:id', async (req, res) => {
-      const productId = req.params.id;
+    app.get('/tags', async (req, res) => {
 
-      const result = await blogsCollection.findOne(
-        { _id: ObjectId(productId) },
-        { projection: { _id: 0, comments: 1 } }
-      );
+
+      const result = await tagCollection.find({}).toArray();
 
       if (result) {
         res.json(result);
