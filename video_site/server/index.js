@@ -29,7 +29,7 @@ const run = async () => {
         const filter = {};
         // add a pagination
 
-        const limit = parseInt(query.limit) || 5;
+        const limit = parseInt(query.limit) || 2;
         const page = parseInt(query.page) || 1;
         const skip = parseInt(page-1) * limit;
          
@@ -45,7 +45,7 @@ const run = async () => {
         }
 
         // Handle search query parameter
-        if (query.q) {
+        if (query.q) { 
             const searchRegex = new RegExp(query.q, 'i');
             filter.$or = [
             { title: searchRegex },

@@ -12,6 +12,8 @@ export default function Search() {
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        console.log(search, "search");
+        
         dispatch(searched(search));
         if (!match) navigate("/");
     }

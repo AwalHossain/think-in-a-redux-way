@@ -1,4 +1,4 @@
-import logo from "../../assets/lws.svg";
+import logo from "../../assets/player.png";
 import search from "../../assets/search.svg";
 import Search from "./Search";
 export default function Navbar() {

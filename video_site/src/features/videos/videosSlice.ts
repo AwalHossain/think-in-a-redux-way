@@ -28,6 +28,8 @@ export interface VideosState {
 export interface FilterProps {
   tags: string[];
   search: string;
+  page: number;
+  pageSize: number;
 }
 
 const inititalState: VideosState = {
@@ -39,8 +41,8 @@ const inititalState: VideosState = {
 
 export const fetchVideos = createAsyncThunk(
   "videos/fetchVideos",
-  async ({ tags, search }: FilterProps) => {
-    const videos = await getVideos({ tags, search });
+  async ({ tags, search, page, pageSize }: FilterProps) => {
+    const videos = await getVideos({ tags, search, page, pageSize });
     return videos;
   }
 );
