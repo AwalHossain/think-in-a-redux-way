@@ -2,11 +2,11 @@ import axios from "../../utils/axios";
 
 export const getRelatedVideo = async (id: string, tags: string[]) => {
   const limit = 5;
-  let queryString =
-    tags?.length > 0
-      ? tags.map((tag) => `tags_like=${tag}`).join("&") +
-        `&id_ne=${id}&_limit=${limit}`
-      : `id_ne=${id}&_limit=${limit}`;
+  let queryString =" "
+  if (tags?.length > 0) {
+    queryString += tags.map((tag) => `tags_like=${tag}`).join("&")  +
+    `&_id_ne=${id}`;
+  }
   const response = await axios.get(`/videos?${queryString}`);
   return response.data;
 };

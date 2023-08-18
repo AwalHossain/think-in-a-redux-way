@@ -20,7 +20,7 @@ const Video = () => {
     console.log(video, "video");
 
 
-    const { id, link, title, tags } = video || {};
+    const { _id, link, title, tags } = video || {};
 
     let content;
 
@@ -28,7 +28,7 @@ const Video = () => {
         content = <Loading />
     }
 
-    if (!isError && status === "idle" && !video?.id) {
+    if (!isError && status === "idle" && !video?._id) {
         content = <div className="col-span-12">No video found</div>
     }
 
@@ -36,14 +36,14 @@ const Video = () => {
         content = <div className="col-span-12">{error}</div>
     }
 
-    if (!isError && status === "idle" && video?.id) {
+    if (!isError && status === "idle" && video?._id) {
         content = (
             <div className="grid grid-cols-3 gap-2 lg:gap-8">
                 <div className="col-span-full w-full space-y-8 lg:col-span-2">
                     <Player link={link} title={title} />
                     <Description video={video} />
                 </div>
-                <RelatedVideo currentVideoId={video?.id} tags={tags} />
+                <RelatedVideo currentVideoId={video?._id} tags={tags} />
             </div>
         )
     }

@@ -1,5 +1,15 @@
+import { useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { fetchVideos } from "../../features/videos/videosSlice";
 
 export default function Pagination() {
+    const { tags, search } = useAppSelector(state => state.filter);
+    const dispatch = useAppDispatch();
+    useEffect(() => {
+        dispatch(fetchVideos({ tags, search }));
+    }, [dispatch, tags, search]);
+
+
     return (
         <section className="pt-12">
             <div

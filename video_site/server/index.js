@@ -27,6 +27,12 @@ const run = async () => {
       try {
         const query = req.query;
         const filter = {};
+        // add a pagination
+
+        const limit = parseInt(query.limit) || 5;
+        const page = parseInt(query.page) || 1;
+        const skip = parseInt(page-1) * limit;
+         
 
         // Handle specific query parameters
         if (query.tags_like) {
@@ -49,8 +55,8 @@ const run = async () => {
         }
 
 
-        if (query.id_ne) {
-          filter._id = { $ne: new ObjectId(query.id_ne) };
+        if (query._id_ne) {
+          filter._id = { $ne: new ObjectId(query._id_ne) };
         }
 
         // sort
@@ -60,9 +66,9 @@ const run = async () => {
         } else if (query._sort === 'most_liked') {
           sortCriteria = { likes: -1 }
         }
-
+          console.log(filter,'filter', query);
         // Fetch data based on filter
-        const result = await videoCollection.find(filter).sort(sortCriteria).limit(parseInt(query._limit) || 10).toArray();
+        const result = await videoCollection.find(filter).sort(sortCriteria).skip(skip).limit(limit).toArray();
 
         res.json(result);
       } catch (error) {
@@ -79,7 +85,7 @@ const run = async () => {
       res.send(result);
     });
 
-    app.get('/video/:id', async (req, res) => {
+    app.get('/videos/:id', async (req, res) => {
       const id = req.params.id;
 
       const result = await videoCollection.findOne({ _id: new ObjectId(id) });

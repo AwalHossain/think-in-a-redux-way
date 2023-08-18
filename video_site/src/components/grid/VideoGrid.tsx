@@ -1,13 +1,11 @@
-import { useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { fetchVideos } from "../../features/videos/videosSlice";
+import { useAppSelector } from "../../app/hooks";
 import Loading from "../ui/Loading";
 import VideoGridItem from "./VideoGridItem";
 
 
 interface Video {
 
-    id: string,
+    _id: string,
     title: string,
     description: string,
     thumbnail: string,
@@ -24,12 +22,8 @@ interface Video {
 
 export default function VideoGrid() {
     const { isError, error, status, videos } = useAppSelector(state => state.videos);
-    const { tags, search } = useAppSelector(state => state.filter);
+  
 
-    const dispatch = useAppDispatch();
-    useEffect(() => {
-        dispatch(fetchVideos({ tags, search }));
-    }, [dispatch, tags, search]);
 
     let content;
 
@@ -41,7 +35,7 @@ export default function VideoGrid() {
     }
 
     if (!isError && status === "idle" && videos.length > 0) {
-        content = videos.map((video: Video) => <VideoGridItem key={video?.id} video={video} />)
+        content = videos.map((video: Video) => <VideoGridItem key={video?._id} video={video} />)
     }
 
     if (isError && status === "failed") {

@@ -4,6 +4,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { getVideo } from "./videoAPI";
 
 export interface VideoProps {
+  _id: string;
   id: string;
   title: string;
   description: string;
@@ -27,6 +28,7 @@ export interface VideoState {
 }
 
 const obj = {
+  _id: "",
   id: "",
   title: "",
   description: "",

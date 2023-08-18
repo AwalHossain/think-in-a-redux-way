@@ -3,8 +3,23 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { getVideos } from "./videosAPI";
 
+type Video = {
+  _id: string;
+  title: string;
+  description: string;
+  thumbnail: string;
+  author: string;
+  avatar: string;
+  views: number;
+  link: string;
+  likes: number;
+  unlikes: number;
+  tags: string[];
+  duration: string;
+  date: string;
+};
 export interface VideosState {
-  videos: [];
+  videos: Video[];
   status: "idle" | "loading" | "failed";
   isError: boolean;
   error: string | null;
