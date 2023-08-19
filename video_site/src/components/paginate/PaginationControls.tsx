@@ -13,7 +13,7 @@ export default function PaginationControls({
   onPageChange,
   onPageSizeChange,
 }: PaginationControlsProps) {
-  const totalPages = Math.ceil(totalItems / pageSize);
+
 
   const handlePageChange = (newPage: number) => {
     onPageChange(newPage);
@@ -25,7 +25,7 @@ export default function PaginationControls({
   };
 
   const pageNumbers = [];
-  for (let i = 1; i <= totalPages; i++) {
+  for (let i = 1; i <= totalItems; i++) {
     pageNumbers.push(i);
   }
 

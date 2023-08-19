@@ -8,7 +8,11 @@ export default function Pagination() {
   const dispatch = useAppDispatch();
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState( 5);
-    console.log(page, pageSize, "page, pageSize");
+    // console.log(page, pageSize, "page, pageSize");
+
+    const {meta} = useAppSelector(state => state.videos);
+
+    const { total, totalPages } = meta;
     
   useEffect(() => {
     dispatch(fetchVideos({ tags, search, page, pageSize }));
@@ -28,7 +32,7 @@ export default function Pagination() {
         <PaginationControls
           page={page}
           pageSize={pageSize}
-          totalItems={7}
+          totalItems={totalPages}
           onPageChange={handlePageChange}
           onPageSizeChange={handlePageSizeChange}
         />

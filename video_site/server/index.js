@@ -70,17 +70,18 @@ const run = async () => {
         // Fetch data based on filter
         const result = await videoCollection.find(filter).sort(sortCriteria).skip(skip).limit(limit).toArray();
         const total = await videoCollection.countDocuments(filter);
-        res.json(
-          {
-            data: result,
-            meta: {
-              total,
-              page,
-              limit,
-              totalPages: Math.ceil(total / limit)
+
+        const response = {
+          data: result,
+          meta: {
+            total,
+            page,
+            limit,
+            totalPages: Math.ceil(total / limit),
           }
-        }
-        );
+        };
+        
+        res.json( response );
       } catch (error) {
         console.error(error);
         res.status(500).send('Error fetching blogs');

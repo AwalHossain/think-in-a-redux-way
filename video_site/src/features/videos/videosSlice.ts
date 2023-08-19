@@ -3,29 +3,46 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { getVideos } from "./videosAPI";
 
-type Video = {
-  _id: string;
-  title: string;
-  description: string;
-  thumbnail: string;
-  author: string;
-  avatar: string;
-  views: number;
-  link: string;
-  likes: number;
-  unlikes: number;
-  tags: string[];
-  duration: string;
-  date: string;
-  meta: {
+
+
+export type Video = {
+    _id: string;
+    title: string;
+    description: string;
+    thumbnail: string;
+    author: string;
+    avatar: string;
     views: number;
-  }
-};
+    link: string;
+    likes: number;
+    unlikes: number;
+    tags: string[];
+    duration: string;
+    date: string;
+}
+
+export interface VideosResponse {
+  data: Video[];
+  meta: {
+      page: number;
+      limit: number;
+      total: number;
+      totalPages: number;
+  };
+}
+
+;
 export interface VideosState {
   videos: Video[];
   status: "idle" | "loading" | "failed";
   isError: boolean;
   error: string | null;
+  meta: {
+    page: number;
+    limit: number;
+    total: number;
+    totalPages: number;
+  };
 }
 
 export interface FilterProps {
@@ -40,6 +57,13 @@ const inititalState: VideosState = {
   status: "idle",
   isError: false,
   error: null,
+  meta: {
+    page: 1,
+    limit: 5,
+    total: 0,
+    totalPages: 0,
+  },
+
 };
 
 export const fetchVideos = createAsyncThunk(
@@ -62,7 +86,9 @@ const videosSlice = createSlice({
       })
       .addCase(fetchVideos.fulfilled, (state, action) => {
         state.status = "idle";
-        state.videos = action.payload;
+        const {data, meta} = action.payload;
+        state.videos = data;
+        state.meta = meta;
       })
       .addCase(fetchVideos.rejected, (state, action) => {
         state.status = "failed";

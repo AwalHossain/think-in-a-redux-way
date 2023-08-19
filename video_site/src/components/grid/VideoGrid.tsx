@@ -3,7 +3,7 @@ import Loading from "../ui/Loading";
 import VideoGridItem from "./VideoGridItem";
 
 
-interface Video {
+export interface Video {
 
     _id: string,
     title: string,
@@ -17,13 +17,15 @@ interface Video {
     unlikes: number,
     tags: string[],
     duration: string,
-    date: string
+    date: string;
+    
 }
 
 export default function VideoGrid() {
-    const { isError, error, status, videos:list } = useAppSelector(state => state.videos);
-  
-    const videos = list?.videos;
+    const { isError, error, status, videos } = useAppSelector(state => state.videos);
+
+    console.log(videos, 'videos');
+    
 
     let content;
 
