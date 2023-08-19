@@ -34,6 +34,7 @@ export default function PaginationControls({
       <div className="max-w-7xl mx-auto px-5 py-6 lg:px-0 flex gap-2 justify-end">
         {pageNumbers.map((pageNumber) => (
           <div
+          onClick={() => handlePageChange(pageNumber)}
             key={pageNumber}
             className={`${
               pageNumber === page
@@ -41,7 +42,7 @@ export default function PaginationControls({
                 : "bg-blue-100 text-blue-600"
             } px-4 py-1 rounded-full`}
           >
-            <button onClick={() => handlePageChange(pageNumber)}>{pageNumber}</button>
+            <button>{pageNumber}</button>
           </div>
         ))}
         <div>
@@ -50,9 +51,9 @@ export default function PaginationControls({
             value={pageSize}
             onChange={handlePageSizeChange}
           >
+            <option value="5">5 per page</option>
             <option value="10">10 per page</option>
-            <option value="20">20 per page</option>
-            <option value="50">50 per page</option>
+            <option value="15">15 per page</option>
           </select>
         </div>
       </div>

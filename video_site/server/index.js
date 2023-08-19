@@ -29,7 +29,7 @@ const run = async () => {
         const filter = {};
         // add a pagination
 
-        const limit = parseInt(query.limit) || 2;
+        const limit = parseInt(query.limit) || 5;
         const page = parseInt(query.page) || 1;
         const skip = parseInt(page-1) * limit;
          
@@ -69,8 +69,18 @@ const run = async () => {
           console.log(filter,'filter', query);
         // Fetch data based on filter
         const result = await videoCollection.find(filter).sort(sortCriteria).skip(skip).limit(limit).toArray();
-
-        res.json(result);
+        const total = await videoCollection.countDocuments(filter);
+        res.json(
+          {
+            data: result,
+            meta: {
+              total,
+              page,
+              limit,
+              totalPages: Math.ceil(total / limit)
+          }
+        }
+        );
       } catch (error) {
         console.error(error);
         res.status(500).send('Error fetching blogs');

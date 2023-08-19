@@ -7,7 +7,7 @@ export default function Pagination() {
   const { tags, search } = useAppSelector(state => state.filter);
   const dispatch = useAppDispatch();
   const [page, setPage] = useState(1);
-  const [pageSize, setPageSize] = useState(2);
+  const [pageSize, setPageSize] = useState( 5);
     console.log(page, pageSize, "page, pageSize");
     
   useEffect(() => {
@@ -23,7 +23,7 @@ export default function Pagination() {
   };
 
   return (
-    <section className="pt-12">
+    <section className="pt-10">
       <div className="max-w-7xl mx-auto px-5 py-6 lg:px-0 flex gap-2 justify-end">
         <PaginationControls
           page={page}

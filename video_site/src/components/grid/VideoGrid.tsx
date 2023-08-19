@@ -21,9 +21,9 @@ interface Video {
 }
 
 export default function VideoGrid() {
-    const { isError, error, status, videos } = useAppSelector(state => state.videos);
+    const { isError, error, status, videos:list } = useAppSelector(state => state.videos);
   
-
+    const videos = list?.videos;
 
     let content;
 

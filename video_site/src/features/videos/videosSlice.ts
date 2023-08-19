@@ -17,6 +17,9 @@ type Video = {
   tags: string[];
   duration: string;
   date: string;
+  meta: {
+    views: number;
+  }
 };
 export interface VideosState {
   videos: Video[];

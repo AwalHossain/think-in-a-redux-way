@@ -15,5 +15,7 @@ export const getVideos = async ({ tags, search, page, pageSize }: FilterProps) =
   queryString += `&page=${page}&limit=${pageSize}`
 
   const response = await axios.get(`/videos?${queryString}`);
+  console.log(response.data, "response.data");
+  
   return response.data;
 };
